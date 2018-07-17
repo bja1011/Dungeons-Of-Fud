@@ -5,6 +5,7 @@ import {AppComponent} from './app.component';
 import {RouterModule, Routes} from '@angular/router';
 import {GameModule} from './game/game.module';
 import {PlayGameComponent} from './game/components/play-game/play-game.component';
+import {MyMaterialModule} from './my-material/my-material.module';
 
 const appRoutes: Routes = [
   {path: '', component: PlayGameComponent},
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
     BrowserModule,
     GameModule,
     RouterModule.forRoot(appRoutes),
+    MyMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
