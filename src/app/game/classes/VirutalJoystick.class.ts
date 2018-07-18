@@ -3,7 +3,6 @@ import Graphics = Phaser.GameObjects.Graphics;
 export default class VJoystick extends Phaser.GameObjects.Graphics {
 
   isOn: boolean;
-  startPos: { x: number, y: number };
   lineGraphic: Graphics;
 
   constructor(params: IVJoystick) {
@@ -11,10 +10,10 @@ export default class VJoystick extends Phaser.GameObjects.Graphics {
     this.scene.add.existing(this);
     this.setScrollFactor(0);
 
-    let circle = new Phaser.Geom.Circle(0, 0, 50);
-    this.strokeCircleShape(circle);
+    this.strokeCircleShape(new Phaser.Geom.Circle(0, 0, 50));
     this.lineGraphic = this.scene.add.graphics();
     this.lineGraphic.setScrollFactor(0);
+    this.hide();
   }
 
   show(x: number, y: number) {
@@ -26,33 +25,27 @@ export default class VJoystick extends Phaser.GameObjects.Graphics {
 
   calculate(x: number, y: number) {
 
-    let vector = {
+    const vector = {
       x: x - this.x,
       y: y - this.y
     };
 
-    let vectorLen = Phaser.Math.Distance.Between(this.x, this.y, x, y);
-    let vectorLen2 = Phaser.Math.Clamp(Phaser.Math.Distance.Between(this.x, this.y, x, y),0,20);
+    const vectorLen = Phaser.Math.Distance.Between(this.x, this.y, x, y);
+    const vectorLen2 = Phaser.Math.Clamp(Phaser.Math.Distance.Between(this.x, this.y, x, y), 0, 20);
 
-
-    let result = {
+    const result = {
       x: vector.x / vectorLen,
       y: vector.y / vectorLen
     };
 
     this.lineGraphic.clear();
 
-    let circle = new Phaser.Geom.Circle(this.x + result.x * vectorLen2, this.y + result.y * vectorLen2,30);
+    const circle = new Phaser.Geom.Circle(this.x + result.x * vectorLen2, this.y + result.y * vectorLen2, 30);
     this.lineGraphic.fillStyle(0xFFff00);
     this.lineGraphic.alpha = 0.5;
     this.lineGraphic.fillCircleShape(circle);
 
     return result;
-
-    // return {
-    //   x: result.x * Phaser.Math.Clamp(vectorLen,-1,1),
-    //   y: result.y * Phaser.Math.Clamp(vectorLen,-1,1),
-    // };
   }
 
   hide() {

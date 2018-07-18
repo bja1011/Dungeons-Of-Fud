@@ -13,7 +13,7 @@ function walkSync(dir, filelist = {}) {
 
     const assetObject = {
       path: relativePath + '?' + fs.statSync(dirFile).mtime.getTime(),
-      group: dir.split('/')[2]
+      // group: dir.split('/')[2]
     };
 
     try {
@@ -23,7 +23,7 @@ function walkSync(dir, filelist = {}) {
 
       if (err.code === 'ENOTDIR' || err.code === 'EBUSY') {
 
-        assets[dirFile] = assetObject.path;
+        assets[relativePath] = assetObject.path;
 
         let fileFiltered = relativePath.replace(/\s|[/.]/g, "-");
         scss.push(`$img-${fileFiltered}: "${assetObject.path}";`);

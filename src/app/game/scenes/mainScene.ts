@@ -1,16 +1,17 @@
 import LayerData = Phaser.Tilemaps.LayerData;
-import VJoystick from "../classes/VirutalJoystick.class";
-import DynamicTilemapLayer = Phaser.Tilemaps.DynamicTilemapLayer;
+import VJoystick from '../classes/VirutalJoystick.class';
 import Tile = Phaser.Tilemaps.Tile;
 import * as dat from 'dat.gui';
+import {MyGame} from '../components/play-game/play-game.component';
+import {MyScene} from './MyScene';
 
 const SPEED = 90;
 
-export class MainScene extends Phaser.Scene {
+export class MainScene extends MyScene {
 
   constructor() {
     super({
-      key: "MainScene"
+      key: 'MainScene'
     });
   }
 
@@ -21,8 +22,7 @@ export class MainScene extends Phaser.Scene {
   movementValues = {x: 0, y: 0};
 
   areas: any[] = [];
-  shadowLayer: DynamicTilemapLayer;
-  disableSave: boolean = true;
+  disableSave = true;
   walkSound: Phaser.Sound.BaseSound;
 
   vj: VJoystick;
@@ -31,21 +31,20 @@ export class MainScene extends Phaser.Scene {
 
   preload(): void {
 
-    this.load.image("player", "./assets/hero.png?3");
-    this.load.image("troll", "./assets/atlas/troll.png");
-    // this.load.image('tiles', '/assets/tilemap/tiles.png');
-    this.load.spritesheet('tiles', '/assets/tilemap/tiles-extruded-big.png?4', {
+    this.gameService = (<MyGame>this.sys.game).gameService;
+
+    this.load.image('troll', this.gameService.assetsService.getAsset('atlas/troll.png'));
+    this.load.spritesheet('tiles', this.gameService.assetsService.getAsset('tilemap/tiles-extruded-big.png'), {
       frameWidth: 32,
       frameHeight: 32,
       margin: 1,
       spacing: 2
     });
-    this.load.tilemapTiledJSON('map', '/assets/tilemap/map.json?3');
-    this.load.scenePlugin('AnimatedTiles', 'assets/plugins/animTiles.js', 'animatedTiles', 'animatedTiles');
-    this.load.audio('bg-music', 'assets/sounds/bg-music.mp3');
-    this.load.audio('walk', 'assets/sounds/walk.mp3');
-    this.load.spritesheet('player-atlas', 'assets/hero-atlas.png', {frameWidth: 32, frameHeight: 32});
-
+    this.load.tilemapTiledJSON('map', this.gameService.assetsService.getAsset('tilemap/map.json'));
+    this.load.scenePlugin('AnimatedTiles', this.gameService.assetsService.getAsset('plugins/animTiles.js'), 'animatedTiles', 'animatedTiles');
+    this.load.audio('bg-music', this.gameService.assetsService.getAsset('sounds/bg-music.mp3'));
+    this.load.audio('walk', this.gameService.assetsService.getAsset('sounds/walk.mp3'));
+    this.load.spritesheet('player-atlas', this.gameService.assetsService.getAsset('hero-atlas.png'), {frameWidth: 32, frameHeight: 32});
   }
 
   create(): void {
@@ -87,7 +86,7 @@ export class MainScene extends Phaser.Scene {
           objLayer.objects.forEach((obj: any) => {
 
             let ll = map.createFromObjects('characters', obj.name, null);
-            ll[0].setTexture(obj.name)
+            ll[0].setTexture(obj.name);
             let name = obj.name;
 
             if (obj.properties && obj.properties.name) {
@@ -105,8 +104,8 @@ export class MainScene extends Phaser.Scene {
             });
             t.setOrigin(0.5, 1);
             t.setStroke('#000', 5);
-            t.setScale(0.5)
-          })
+            t.setScale(0.5);
+          });
         });
       }
     });
@@ -116,7 +115,7 @@ export class MainScene extends Phaser.Scene {
         if (objLayer.name === 'areas') {
           this.areas.push(new Phaser.Geom.Rectangle(obj.x, obj.y, obj.width, obj.height));
         }
-      })
+      });
     });
 
 
@@ -203,7 +202,7 @@ export class MainScene extends Phaser.Scene {
 
 
     this.input.on('pointerdown', (pointer) => {
-      this.vj.show(pointer.downX, pointer.downY)
+      this.vj.show(pointer.downX, pointer.downY);
     });
 
     this.input.on('pointerup', (pointer) => {
@@ -231,8 +230,8 @@ export class MainScene extends Phaser.Scene {
           if (y) y.map((x, xi) => {
             let tile = this.map.getTileAt(yi, xi);
             if (tile) tile.setVisible(false);
-          })
-        })
+          });
+        });
       }
     }
 
@@ -319,28 +318,28 @@ export class MainScene extends Phaser.Scene {
       this.movementValues = {
         ...this.movementValues,
         x: -1
-      }
+      };
     }
 
     if (this.controls.right.isDown) {
       this.movementValues = {
         ...this.movementValues,
         x: 1
-      }
+      };
     }
 
     if (this.controls.up.isDown) {
       this.movementValues = {
         ...this.movementValues,
         y: -1
-      }
+      };
     }
 
     if (this.controls.down.isDown) {
       this.movementValues = {
         ...this.movementValues,
         y: 1
-      }
+      };
     }
 
     if (this.movementValues.x) {
@@ -358,10 +357,10 @@ export class MainScene extends Phaser.Scene {
 
     if (this.movementValues.x < 0 && this.player.lastAnim != 'walk-left') {
       this.player.anims.play('walk-left');
-      this.player.lastAnim = 'walk-left'
+      this.player.lastAnim = 'walk-left';
     } else if (this.player.body.velocity.x > 0 && this.player.lastAnim != 'walk-right') {
       this.player.anims.play('walk-right');
-      this.player.lastAnim = 'walk-right'
+      this.player.lastAnim = 'walk-right';
     }
 
     //

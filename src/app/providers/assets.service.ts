@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as AssetsData from '../../assets.json';
 
 @Injectable({
@@ -7,6 +7,8 @@ import * as AssetsData from '../../assets.json';
 export class AssetsService {
 
   private readonly assetsData = AssetsData;
-  constructor() {
+
+  getAsset(assetPath: string) {
+    return this.assetsData[`/assets/${assetPath}`] ? this.assetsData[`/assets/${assetPath}`] : 'no-asset';
   }
 }

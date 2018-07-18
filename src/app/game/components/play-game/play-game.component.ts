@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import 'phaser';
-import {PreloadScene} from '../../scenes/Preload.scene';
 import {GameService} from '../../providers/game.service';
 import {AssetsService} from '../../../providers/assets.service';
 import {MainScene} from '../../scenes/mainScene';
@@ -17,7 +16,7 @@ export class PlayGameComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.gameService.game = new MyGame({
+    this.gameService.game = new MyGame(<any>{
         width: innerWidth,
         height: innerHeight,
         type: Phaser.WEBGL,
@@ -39,7 +38,7 @@ export class PlayGameComponent implements OnInit {
 
 }
 
-class MyGame extends Phaser.Game {
+export class MyGame extends Phaser.Game {
   gameService: GameService;
 
   constructor(gameConfig: GameConfig, gameService: GameService) {
