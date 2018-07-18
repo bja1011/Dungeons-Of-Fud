@@ -41,7 +41,12 @@ export class MainScene extends MyScene {
       spacing: 2
     });
     this.load.tilemapTiledJSON('map', this.gameService.assetsService.getAsset('tilemap/map.json'));
-    this.load.scenePlugin('AnimatedTiles', this.gameService.assetsService.getAsset('plugins/animTiles.js'), 'animatedTiles', 'animatedTiles');
+    this.load.scenePlugin(
+      'AnimatedTiles',
+      this.gameService.assetsService.getAsset('plugins/animTiles.js'),
+      'animatedTiles',
+      'animatedTiles'
+    );
     this.load.audio('bg-music', this.gameService.assetsService.getAsset('sounds/bg-music.mp3'));
     this.load.audio('walk', this.gameService.assetsService.getAsset('sounds/walk.mp3'));
     this.load.spritesheet('player-atlas', this.gameService.assetsService.getAsset('hero-atlas.png'), {frameWidth: 32, frameHeight: 32});
