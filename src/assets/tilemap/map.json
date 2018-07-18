@@ -84,13 +84,13 @@
          "objects":[
                 {
                  "gid":3073,
-                 "height":54,
+                 "height":68.5,
                  "id":9,
                  "name":"troll",
                  "properties":
                     {
                      "fud":"1",
-                     "name":"Ran \n XRP Troll",
+                     "name":"Ran NeuNer \n XRP Troll",
                      "type":"(3)"
                     },
                  "propertytypes":
@@ -102,9 +102,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":45.3333,
-                 "x":520.334,
-                 "y":440.333
+                 "width":58.611075,
+                 "x":520.056225,
+                 "y":451.833
                 }, 
                 {
                  "gid":3075,
@@ -130,7 +130,7 @@
          "name":"path",
          "opacity":0.19,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":100,
          "x":0,
          "y":0
@@ -141,7 +141,7 @@
          "name":"shadow",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":100,
          "x":0,
          "y":0
@@ -181,7 +181,7 @@
  "nextobjectid":16,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.1.4",
+ "tiledversion":"1.1.5",
  "tileheight":32,
  "tilesets":[
         {
