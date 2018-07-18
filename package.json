@@ -4,10 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "node prepare-assets.js && ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "build": "node prepare-assets.js && ng build",
+    "test": "node prepare-assets.js && ng test",
+    "lint": "node prepare-assets.js && ng lint",
+    "e2e": "node prepare-assets.js && ng e2e"
   },
   "private": true,
   "dependencies": {
