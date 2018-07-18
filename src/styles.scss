@@ -2,6 +2,11 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "assets";
 
+@font-face {
+  font-family: "Connection";
+  src: url($asset--font-Connection-ttf) format("truetype");
+}
+
 html,body  {
   width: 100%;
   height: 100%;

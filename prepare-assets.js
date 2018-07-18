@@ -25,8 +25,8 @@ function walkSync(dir, filelist = {}) {
 
         assets[relativePath] = assetObject.path;
 
-        let fileFiltered = relativePath.replace(/\s|[/.]/g, "-");
-        scss.push(`$img-${fileFiltered}: "${assetObject.path}";`);
+        let fileFiltered = relativePath.replace(/\s|[/.]/g, "-").replace('assets-','');
+        scss.push(`$asset-${fileFiltered}: "${assetObject.path}";`);
 
       }
       else throw err;

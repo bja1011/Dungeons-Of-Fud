@@ -31,6 +31,14 @@ export class MainScene extends MyScene {
 
   preload(): void {
 
+
+    let preloadValue = this.add.text(100, 100, `test`, {
+      fontSize: 20,
+      fontFamily: 'Connection',
+      align: 'center',
+      weight: 'bold'
+    });
+
     this.gameService = (<MyGame>this.sys.game).gameService;
 
     this.load.image('troll', this.gameService.assetsService.getAsset('atlas/troll.png'));
@@ -50,6 +58,15 @@ export class MainScene extends MyScene {
     this.load.audio('bg-music', this.gameService.assetsService.getAsset('sounds/bg-music.mp3'));
     this.load.audio('walk', this.gameService.assetsService.getAsset('sounds/walk.mp3'));
     this.load.spritesheet('player-atlas', this.gameService.assetsService.getAsset('hero-atlas.png'), {frameWidth: 32, frameHeight: 32});
+
+    this.load.on('progress', (progress) => {
+      preloadValue.setText(100 * progress + '%');
+    });
+    //
+    // let totalFiles = this.load.totalToLoad;
+    // this.load.loadEvent(function () {
+    //   preloadValue.setText(Math.round(this.load.totalComplete / totalFiles * 100) + ' %');
+    // }, this);
   }
 
   create(): void {
@@ -101,7 +118,7 @@ export class MainScene extends MyScene {
             if (obj.properties && obj.properties.type) {
               name += ' \n ' + obj.properties.type;
             }
-            let t = this.add.text(ll[0].x, ll[0].y - 15, `${name}`, {
+            let t = this.add.text(ll[0].x, ll[0].y - 45, `${name}`, {
               fontSize: 20,
               fontFamily: 'Connection',
               align: 'center',
@@ -109,7 +126,7 @@ export class MainScene extends MyScene {
             });
             t.setOrigin(0.5, 1);
             t.setStroke('#000', 5);
-            t.setScale(0.5);
+            // t.setScale(0.5);
           });
         });
       }

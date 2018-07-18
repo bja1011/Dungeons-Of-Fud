@@ -2,7 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import 'phaser';
 import {GameService} from '../../providers/game.service';
 import {AssetsService} from '../../../providers/assets.service';
-import {MainScene} from '../../scenes/mainScene';
+import {MainScene} from '../../scenes/MainScene';
+import {BootScene} from '../../scenes/Boot.scene';
 
 @Component({
   selector: 'app-play-game',
@@ -21,7 +22,7 @@ export class PlayGameComponent implements OnInit {
         height: innerHeight,
         type: Phaser.WEBGL,
         parent: 'game',
-        scene: MainScene,
+        scene: [BootScene, MainScene],
         pixelArt: true,
         autoResize: true,
         activePointers: 1,
