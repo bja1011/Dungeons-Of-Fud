@@ -3976,7 +3976,7 @@ declare namespace Phaser {
      *
      * @param GameConfig The configuration object for your Phaser Game instance.
      */
-    constructor(GameConfig?: GameConfig);
+    constructor(GameConfig?: GameConfig | any);
 
     /**
      * The parsed Game Configuration object.

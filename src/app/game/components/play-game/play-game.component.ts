@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import 'phaser';
 import {PreloadScene} from '../../scenes/Preload.scene';
 import {GameService} from '../../providers/game.service';
+import {MainScene} from '../../scenes/mainScene';
 
 @Component({
   selector: 'app-play-game',
@@ -19,15 +20,17 @@ export class PlayGameComponent implements OnInit {
       height: innerHeight,
       type: Phaser.WEBGL,
       parent: 'game',
-      disableContextMenu: true,
-      scene: [PreloadScene],
+      scene: MainScene,
+      pixelArt: true,
+      autoResize: true,
+      activePointers: 1,
       physics: {
         default: 'arcade',
         arcade: {
           debug: false,
           gravity: {y: 0}
         }
-      }
+      },
     });
   }
 
