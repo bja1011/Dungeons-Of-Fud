@@ -1,0 +1,83 @@
+{
+	"textures": [
+		{
+			"image": "atlas.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 64,
+				"h": 64
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "m3.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 34,
+						"h": 34
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 33,
+						"h": 33
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 33,
+						"h": 33
+					}
+				},
+				{
+					"filename": "m2.png",
+					"rotated": true,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 24,
+						"h": 30
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 0,
+						"w": 23,
+						"h": 30
+					},
+					"frame": {
+						"x": 1,
+						"y": 36,
+						"w": 23,
+						"h": 30
+					}
+				},
+				{
+					"filename": "m1.png",
+					"rotated": true,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 24,
+						"h": 30
+					},
+					"spriteSourceSize": {
+						"x": 1,
+						"y": 1,
+						"w": 22,
+						"h": 28
+					},
+					"frame": {
+						"x": 33,
+						"y": 36,
+						"w": 22,
+						"h": 28
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:4402046d667fda4c98965deea4805cb1:05b501215266d193b855241e39117e5c:cbce6b53f0f49e0bf15173c25c41f876$"
+	}
+}
