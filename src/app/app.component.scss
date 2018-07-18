@@ -1,5 +1,11 @@
+@import "../assets.scss";
+
 :host {
   width: 100%;
   height: 100%;
   display: block;
+}
+
+.test {
+  background: url($img--assets-map-roguelike_characters__oct_2014__by_emimonserrate-d83wlcs-png);
 }
