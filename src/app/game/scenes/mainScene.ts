@@ -58,7 +58,7 @@ export class MainScene extends MyScene {
     this.animatedTiles = this['animatedTiles'];
 
     const music = this.sound.add('bg-music', {
-      mute: false,
+      mute: true,
       volume: 1,
       rate: 1,
       detune: 0,
