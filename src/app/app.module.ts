@@ -6,6 +6,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {GameModule} from './game/game.module';
 import {PlayGameComponent} from './game/components/play-game/play-game.component';
 import {MyMaterialModule} from './my-material/my-material.module';
+import {AssetsService} from './providers/assets.service';
 
 const appRoutes: Routes = [
   {path: '', component: PlayGameComponent},
@@ -21,7 +22,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     MyMaterialModule,
   ],
-  providers: [],
+  providers: [
+    AssetsService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
