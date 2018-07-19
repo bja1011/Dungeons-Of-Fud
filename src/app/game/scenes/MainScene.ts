@@ -3,7 +3,7 @@ import VJoystick from '../classes/VirutalJoystick.class';
 import Tile = Phaser.Tilemaps.Tile;
 import * as dat from 'dat.gui';
 import {MyGame} from '../components/play-game/play-game.component';
-import {MyScene} from './MyScene';
+import {MyScene} from '../classes/MyScene';
 import * as Utils from './../utils/utils';
 import {utils} from 'protractor';
 import {Troll} from '../classes/Troll.class';
@@ -23,6 +23,8 @@ export class MainScene extends MyScene {
   map;
   animatedTiles: any;
   movementValues = {x: 0, y: 0};
+
+  charactersLayer;
 
   trolls: any[] = [];
 
@@ -110,17 +112,34 @@ export class MainScene extends MyScene {
     map.layers.forEach((l: LayerData, index) => {
       layers[index] = map.createDynamicLayer(index, tiles, 0, 0);
 
+      console.log(l.name === 'characters');
+      {
+        this.charactersLayer = layers[index];
+        console.log(this.charactersLayer);
+      }
+
+      if (l.name === 'shadow') {
+        layers[index].setDepth(100000);
+      }
+
       if (index == 7) {
 
         map.objects.forEach(objLayer => {
-          if (objLayer.name !== 'areas') objLayer.objects.forEach((obj: any) => {
+          if (objLayer.name == 'characters') objLayer.objects.forEach((obj: any) => {
 
             // let troll = new Troll(this, obj.x, obj.y, 'characters', Utils.getObjectImage(obj.gid, this.map.imageCollections));
-            const troll = this.physics.add.sprite(obj.x, obj.y, 'characters', Utils.getObjectImage(obj.gid, this.map.imageCollections));
-            console.log(troll);
-            troll.setOrigin(0, 1);
+            const troll = this.add.sprite(obj.x, obj.y, 'characters', Utils.getObjectImage(obj.gid, this.map.imageCollections));
+            troll.setOrigin(0.5, 1);
+            troll.setDepth(troll.y);
+            (<any>troll).interactionRadius = 30;
 
-            troll.setCircle(46, 0, -30);
+            if ((<MyGame>this.sys.game).debug) {
+              const g = this.add.graphics();
+              const circle = new Phaser.Geom.Circle(troll.x, troll.y, (<any>troll).interactionRadius);
+              g.fillStyle(0xFFff00);
+              g.alpha = 0.5;
+              g.fillCircleShape(circle);
+            }
 
             this.trolls.push(troll);
             // let name = obj.name;
@@ -248,7 +267,7 @@ export class MainScene extends MyScene {
     });
 
     this.input.on('pointermove', (pointer) => {
-      if (pointer.isDown &&  this.vj.isOn) {
+      if (pointer.isDown && this.vj.isOn) {
         this.movementValues = this.vj.calculate(pointer.position.x, pointer.position.y);
       }
     });
@@ -353,6 +372,7 @@ export class MainScene extends MyScene {
     if (!this.vj.isOn) {
       this.movementValues = {x: 0, y: 0};
     }
+
     if (this.controls.left.isDown) {
       this.movementValues = {
         ...this.movementValues,
@@ -379,6 +399,10 @@ export class MainScene extends MyScene {
         ...this.movementValues,
         y: 1
       };
+    }
+
+    if (this.player.stopped) {
+      this.movementValues = {x: 0, y: 0};
     }
 
     if (this.movementValues.x) {
@@ -416,16 +440,27 @@ export class MainScene extends MyScene {
       this.player.lastAnim = 'idle';
     } else {
       this.trolls.forEach(troll => {
-        if (!troll.talk && Phaser.Math.Distance.Between(this.player.x, this.player.y, troll.x, troll.y) < 50) {
+
+        if (!troll.talk && Phaser.Math.Distance.Between(this.player.x, this.player.y, troll.x, troll.y) <= (<any>troll).interactionRadius) {
+
           troll.talk = true;
           this.vj.hide();
           const dialogRef = this.gameService.dialogService.open();
+          this.player.stopped = true;
+
           dialogRef.afterClosed().subscribe(result => {
-            troll.talk = false;
+            this.player.stopped = false;
           });
         }
+
+        if (troll.talk && Phaser.Math.Distance.Between(this.player.x, this.player.y, troll.x, troll.y) > (<any>troll).interactionRadius) {
+          troll.talk = false;
+        }
+
       });
     }
+
+    this.player.setDepth(this.player.y);
 
   }
 

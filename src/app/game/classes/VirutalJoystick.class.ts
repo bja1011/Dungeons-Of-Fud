@@ -13,6 +13,7 @@ export default class VJoystick extends Phaser.GameObjects.Graphics {
     this.strokeCircleShape(new Phaser.Geom.Circle(0, 0, 50));
     this.lineGraphic = this.scene.add.graphics();
     this.lineGraphic.setScrollFactor(0);
+    this.setDepth(1000000);
     this.hide();
   }
 
@@ -44,6 +45,8 @@ export default class VJoystick extends Phaser.GameObjects.Graphics {
     this.lineGraphic.fillStyle(0xFFff00);
     this.lineGraphic.alpha = 0.5;
     this.lineGraphic.fillCircleShape(circle);
+    this.lineGraphic.setDepth(1000000);
+
 
     return result;
   }

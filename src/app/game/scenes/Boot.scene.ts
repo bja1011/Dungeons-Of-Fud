@@ -1,5 +1,5 @@
 import 'phaser';
-import {MyScene} from './MyScene';
+import {MyScene} from '../classes/MyScene';
 
 export class BootScene extends MyScene {
 

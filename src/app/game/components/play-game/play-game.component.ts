@@ -17,6 +17,8 @@ export class PlayGameComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    const debugMode = window.location.search.indexOf('debug') > -1;
     this.gameService.game = new MyGame(<any>{
         width: innerWidth,
         height: innerHeight,
@@ -29,13 +31,17 @@ export class PlayGameComponent implements OnInit {
         physics: {
           default: 'arcade',
           arcade: {
-            debug: true,
+            debug: debugMode,
             gravity: {y: 0}
           }
         },
       },
       this.gameService
     );
+
+    if (debugMode) {
+      (<MyGame>this.gameService.game).debug = true;
+    }
 
     window.addEventListener('resize', (event) => {
       this.gameService.game.resize(window.innerWidth, window.innerHeight);
@@ -46,6 +52,7 @@ export class PlayGameComponent implements OnInit {
 
 export class MyGame extends Phaser.Game {
   gameService: GameService;
+  public debug = false;
 
   constructor(gameConfig: GameConfig, gameService: GameService) {
     super(gameConfig);
