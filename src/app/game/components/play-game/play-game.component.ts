@@ -29,12 +29,17 @@ export class PlayGameComponent implements OnInit {
         physics: {
           default: 'arcade',
           arcade: {
-            debug: false,
+            debug: true,
             gravity: {y: 0}
           }
         },
       },
-      this.gameService);
+      this.gameService
+    );
+
+    window.addEventListener('resize', (event) => {
+      this.gameService.game.resize(window.innerWidth, window.innerHeight);
+    }, false);
   }
 
 }

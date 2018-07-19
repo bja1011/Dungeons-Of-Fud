@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextobjectid="16">
+<map version="1.0" tiledversion="1.1.5" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextobjectid="27">
  <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="3072" columns="64">
   <image source="tiles-big.png" width="2048" height="1536"/>
   <terraintypes>
@@ -86,17 +86,17 @@
    </animation>
   </tile>
  </tileset>
- <tileset firstgid="3073" name="objects" tilewidth="48" tileheight="60" tilecount="3" columns="0">
+ <tileset firstgid="3073" name="objects" tilewidth="60" tileheight="60" tilecount="3" columns="0">
   <tileoffset x="-4" y="0"/>
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
-   <image width="48" height="60" source="../atlas/troll.png"/>
+   <image width="48" height="60" source="../atlas/troll-1.png"/>
   </tile>
   <tile id="1">
-   <image width="24" height="30" source="../atlas/m2.png"/>
+   <image width="48" height="60" source="../atlas/troll-2.png"/>
   </tile>
   <tile id="2">
-   <image width="34" height="34" source="../atlas/m3.png"/>
+   <image width="60" height="60" source="../atlas/troll-3.png"/>
   </tile>
  </tileset>
  <layer name="ground1" width="100" height="100">
@@ -828,7 +828,7 @@
 </data>
  </layer>
  <objectgroup name="characters">
-  <object id="9" name="troll" gid="3073" x="520.056" y="451.833" width="58.6111" height="68.5">
+  <object id="9" name="troll" gid="3073" x="520.056" y="451.833" width="48" height="60">
    <properties>
     <property name="fud" value="1"/>
     <property name="name">Ran NeuNer 
@@ -836,9 +836,10 @@
     <property name="type" value="(3)"/>
    </properties>
   </object>
-  <object id="11" gid="3075" x="617.333" y="414" width="34" height="34"/>
+  <object id="19" gid="3075" x="1539" y="493" width="60" height="60"/>
+  <object id="21" gid="3074" x="645.333" y="511.333" width="48" height="60"/>
  </objectgroup>
- <layer name="path" width="100" height="100" opacity="0.19">
+ <layer name="path" width="100" height="100" visible="0" opacity="0.19">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

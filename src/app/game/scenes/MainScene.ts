@@ -4,6 +4,9 @@ import Tile = Phaser.Tilemaps.Tile;
 import * as dat from 'dat.gui';
 import {MyGame} from '../components/play-game/play-game.component';
 import {MyScene} from './MyScene';
+import * as Utils from './../utils/utils';
+import {utils} from 'protractor';
+import {Troll} from '../classes/Troll.class';
 
 const SPEED = 90;
 
@@ -20,6 +23,8 @@ export class MainScene extends MyScene {
   map;
   animatedTiles: any;
   movementValues = {x: 0, y: 0};
+
+  trolls: any[] = [];
 
   areas: any[] = [];
   disableSave = true;
@@ -41,7 +46,7 @@ export class MainScene extends MyScene {
 
     this.gameService = (<MyGame>this.sys.game).gameService;
 
-    this.load.image('troll', this.gameService.assetsService.getAsset('atlas/troll.png'));
+    this.load.atlas('characters', this.gameService.assetsService.getAsset('atlas/atlas.png'), this.gameService.assetsService.getAsset('atlas/atlas.json'));
     this.load.spritesheet('tiles', this.gameService.assetsService.getAsset('tilemap/tiles-extruded-big.png'), {
       frameWidth: 32,
       frameHeight: 32,
@@ -95,38 +100,47 @@ export class MainScene extends MyScene {
 
     let map = this.make.tilemap({key: 'map'});
     this.map = map;
+    console.log(this);
 
     let tiles = map.addTilesetImage('tiles', 'tiles', 32, 32, 1, 2);
 
     let layers = [];
+    let characterObjects;
+
     map.layers.forEach((l: LayerData, index) => {
       layers[index] = map.createDynamicLayer(index, tiles, 0, 0);
 
       if (index == 7) {
 
         map.objects.forEach(objLayer => {
-          objLayer.objects.forEach((obj: any) => {
+          if (objLayer.name !== 'areas') objLayer.objects.forEach((obj: any) => {
 
-            let ll = map.createFromObjects('characters', obj.name, null);
-            ll[0].setTexture(obj.name);
-            let name = obj.name;
+            // let troll = new Troll(this, obj.x, obj.y, 'characters', Utils.getObjectImage(obj.gid, this.map.imageCollections));
+            const troll = this.physics.add.sprite(obj.x, obj.y, 'characters', Utils.getObjectImage(obj.gid, this.map.imageCollections));
+            console.log(troll);
+            troll.setOrigin(0, 1);
 
-            if (obj.properties && obj.properties.name) {
-              name = obj.properties.name;
-            }
+            troll.setCircle(46, 0, -30);
 
-            if (obj.properties && obj.properties.type) {
-              name += ' \n ' + obj.properties.type;
-            }
-            let t = this.add.text(ll[0].x, ll[0].y - 45, `${name}`, {
-              fontSize: 20,
-              fontFamily: 'Connection',
-              align: 'center',
-              weight: 'bold'
-            });
-            t.setOrigin(0.5, 1);
-            t.setStroke('#000', 5);
-            // t.setScale(0.5);
+            this.trolls.push(troll);
+            // let name = obj.name;
+            //
+            // if (obj.properties && obj.properties.name) {
+            //   name = obj.properties.name;
+            // }
+            //
+            // if (obj.properties && obj.properties.type) {
+            //   name += ' \n ' + obj.properties.type;
+            // }
+            // let t = this.add.text(character[0].x, character[0].y - 45, `${name}`, {
+            //   fontSize: 20,
+            //   fontFamily: 'Connection',
+            //   align: 'center',
+            //   weight: 'bold'
+            // });
+            // t.setOrigin(0.5, 1);
+            // t.setStroke('#000', 5);
+            // // t.setScale(0.5);
           });
         });
       }
@@ -211,6 +225,7 @@ export class MainScene extends MyScene {
     this.controls = this.input.keyboard.createCursorKeys();
 
     this.cameras.main.setBackgroundColor('#1c1117');
+    this.cameras.main.roundPixels = false;
 
     this.vj = new VJoystick({
       scene: this,
@@ -233,7 +248,7 @@ export class MainScene extends MyScene {
     });
 
     this.input.on('pointermove', (pointer) => {
-      if (pointer.isDown) {
+      if (pointer.isDown &&  this.vj.isOn) {
         this.movementValues = this.vj.calculate(pointer.position.x, pointer.position.y);
       }
     });
@@ -249,9 +264,11 @@ export class MainScene extends MyScene {
       this.shadowExploreData = savedData.shadow;
       if (this.shadowExploreData) {
         this.shadowExploreData.forEach((y, yi) => {
-          if (y) y.map((x, xi) => {
-            let tile = this.map.getTileAt(yi, xi);
-            if (tile) tile.setVisible(false);
+          y && y.map((x, xi) => {
+            const tile = this.map.getTileAt(yi, xi);
+            if (tile) {
+              tile.setVisible(false);
+            }
           });
         });
       }
@@ -394,15 +411,22 @@ export class MainScene extends MyScene {
     //   this.player.lastAnim = 'walk-down'
     // }
 
-    if (this.movementValues.x == 0 && this.movementValues.y == 0) {
+    if (this.movementValues.x === 0 && this.movementValues.y === 0) {
       this.player.anims.play('idle');
       this.player.lastAnim = 'idle';
+    } else {
+      this.trolls.forEach(troll => {
+        if (!troll.talk && Phaser.Math.Distance.Between(this.player.x, this.player.y, troll.x, troll.y) < 50) {
+          troll.talk = true;
+          this.vj.hide();
+          const dialogRef = this.gameService.dialogService.open();
+          dialogRef.afterClosed().subscribe(result => {
+            troll.talk = false;
+          });
+        }
+      });
     }
 
-  }
-
-  resize() {
-    this.cameras.resize(innerWidth, innerHeight);
   }
 
 }

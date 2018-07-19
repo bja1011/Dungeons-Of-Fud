@@ -7,4 +7,9 @@ export class MyScene extends Phaser.Scene {
   constructor(config) {
     super(config);
   }
+
+  resize() {
+    this.cameras.resize(innerWidth, innerHeight);
+  }
+
 }

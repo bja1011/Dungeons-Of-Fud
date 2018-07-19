@@ -84,7 +84,7 @@
          "objects":[
                 {
                  "gid":3073,
-                 "height":68.5,
+                 "height":60,
                  "id":9,
                  "name":"troll",
                  "properties":
@@ -102,21 +102,33 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":58.611075,
-                 "x":520.056225,
+                 "width":48,
+                 "x":520.056,
                  "y":451.833
                 }, 
                 {
                  "gid":3075,
-                 "height":34,
-                 "id":11,
+                 "height":60,
+                 "id":19,
                  "name":"",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":34,
-                 "x":617.333,
-                 "y":414
+                 "width":60,
+                 "x":1539,
+                 "y":493
+                }, 
+                {
+                 "gid":3074,
+                 "height":60,
+                 "id":21,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":48,
+                 "x":645.333333333333,
+                 "y":511.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -130,7 +142,7 @@
          "name":"path",
          "opacity":0.19,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":100,
          "x":0,
          "y":0
@@ -178,7 +190,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":16,
+ "nextobjectid":27,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.1.5",
@@ -488,24 +500,24 @@
             {
              "0":
                 {
-                 "image":"..\/atlas\/troll.png",
+                 "image":"..\/atlas\/troll-1.png",
                  "imageheight":60,
                  "imagewidth":48
                 },
              "1":
                 {
-                 "image":"..\/atlas\/m2.png",
-                 "imageheight":30,
-                 "imagewidth":24
+                 "image":"..\/atlas\/troll-2.png",
+                 "imageheight":60,
+                 "imagewidth":48
                 },
              "2":
                 {
-                 "image":"..\/atlas\/m3.png",
-                 "imageheight":34,
-                 "imagewidth":34
+                 "image":"..\/atlas\/troll-3.png",
+                 "imageheight":60,
+                 "imagewidth":60
                 }
             },
-         "tilewidth":48
+         "tilewidth":60
         }],
  "tilewidth":32,
  "type":"map",

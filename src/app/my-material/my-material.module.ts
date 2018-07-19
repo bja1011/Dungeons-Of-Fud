@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
-import {MatButtonModule} from '@angular/material';
+import {MatButtonModule, MatDialogModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 const usedModules = [
   BrowserAnimationsModule,
   MatButtonModule,
+  MatDialogModule,
 ];
 
 @NgModule({
@@ -13,3 +14,4 @@ const usedModules = [
 })
 export class MyMaterialModule {
 }
+

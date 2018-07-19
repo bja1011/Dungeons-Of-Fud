@@ -26,7 +26,7 @@
             </struct>
         </array>
         <key>allowRotation</key>
-        <true/>
+        <false/>
         <key>shapeDebug</key>
         <false/>
         <key>dpi</key>
@@ -106,7 +106,7 @@
             <key>freeSizeMode</key>
             <enum type="AlgorithmSettings::AlgorithmFreeSizeMode">Best</enum>
             <key>sizeConstraints</key>
-            <enum type="AlgorithmSettings::SizeConstraints">POT</enum>
+            <enum type="AlgorithmSettings::SizeConstraints">AnySize</enum>
             <key>forceSquared</key>
             <false/>
             <key>maxRects</key>
@@ -181,39 +181,39 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">m1.png</key>
-            <key type="filename">m2.png</key>
+            <key type="filename">troll-1.png</key>
+            <key type="filename">troll-2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>6,8,12,15</rect>
+                <rect>12,15,24,30</rect>
                 <key>scale9Paddings</key>
-                <rect>6,8,12,15</rect>
+                <rect>12,15,24,30</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">m3.png</key>
+            <key type="filename">troll-3.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>9,9,17,17</rect>
+                <rect>15,15,30,30</rect>
                 <key>scale9Paddings</key>
-                <rect>9,9,17,17</rect>
+                <rect>15,15,30,30</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>m1.png</filename>
-            <filename>m2.png</filename>
-            <filename>m3.png</filename>
+            <filename>troll-1.png</filename>
+            <filename>troll-2.png</filename>
+            <filename>troll-3.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -4,72 +4,72 @@
 			"image": "atlas.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 64,
-				"h": 64
+				"w": 150,
+				"h": 62
 			},
 			"scale": 1,
 			"frames": [
 				{
-					"filename": "m3.png",
+					"filename": "troll-2.png",
 					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 34,
-						"h": 34
+						"w": 48,
+						"h": 60
 					},
 					"spriteSourceSize": {
-						"x": 1,
+						"x": 3,
 						"y": 0,
-						"w": 33,
-						"h": 33
+						"w": 45,
+						"h": 60
 					},
 					"frame": {
 						"x": 1,
 						"y": 1,
-						"w": 33,
-						"h": 33
+						"w": 45,
+						"h": 60
 					}
 				},
 				{
-					"filename": "m2.png",
-					"rotated": true,
+					"filename": "troll-3.png",
+					"rotated": false,
 					"trimmed": true,
 					"sourceSize": {
-						"w": 24,
-						"h": 30
+						"w": 60,
+						"h": 60
 					},
 					"spriteSourceSize": {
-						"x": 1,
-						"y": 0,
-						"w": 23,
-						"h": 30
-					},
-					"frame": {
-						"x": 1,
-						"y": 36,
-						"w": 23,
-						"h": 30
-					}
-				},
-				{
-					"filename": "m1.png",
-					"rotated": true,
-					"trimmed": true,
-					"sourceSize": {
-						"w": 24,
-						"h": 30
-					},
-					"spriteSourceSize": {
-						"x": 1,
+						"x": 3,
 						"y": 1,
-						"w": 22,
-						"h": 28
+						"w": 57,
+						"h": 56
 					},
 					"frame": {
-						"x": 33,
-						"y": 36,
-						"w": 22,
-						"h": 28
+						"x": 48,
+						"y": 1,
+						"w": 57,
+						"h": 56
+					}
+				},
+				{
+					"filename": "troll-1.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 48,
+						"h": 60
+					},
+					"spriteSourceSize": {
+						"x": 3,
+						"y": 3,
+						"w": 42,
+						"h": 54
+					},
+					"frame": {
+						"x": 107,
+						"y": 1,
+						"w": 42,
+						"h": 54
 					}
 				}
 			]
@@ -78,6 +78,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:4402046d667fda4c98965deea4805cb1:05b501215266d193b855241e39117e5c:cbce6b53f0f49e0bf15173c25c41f876$"
+		"smartupdate": "$TexturePacker:SmartUpdate:37e5c054903faf425281666b193f21ff:5d72a165a20b5132ed07a79ac2d0970d:cbce6b53f0f49e0bf15173c25c41f876$"
 	}
 }

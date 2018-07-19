@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "node prepare-assets.js && ng serve",
     "build": "node prepare-assets.js && ng build",
+    "deploy": "node prepare-assets.js && ng build --prod && firebase deploy",
     "test": "node prepare-assets.js && ng test",
     "lint": "node prepare-assets.js && ng lint",
     "e2e": "node prepare-assets.js && ng e2e",
