@@ -5,8 +5,6 @@ import * as dat from 'dat.gui';
 import {MyGame} from '../components/play-game/play-game.component';
 import {MyScene} from '../classes/MyScene';
 import * as Utils from './../utils/utils';
-import {utils} from 'protractor';
-import {Troll} from '../classes/Troll.class';
 
 const SPEED = 90;
 
@@ -38,8 +36,7 @@ export class MainScene extends MyScene {
 
   preload(): void {
 
-
-    let preloadValue = this.add.text(100, 100, `test`, {
+    const preloadValue = this.add.text(100, 100, `test`, {
       fontSize: 20,
       fontFamily: 'Connection',
       align: 'center',
@@ -48,13 +45,22 @@ export class MainScene extends MyScene {
 
     this.gameService = (<MyGame>this.sys.game).gameService;
 
-    this.load.atlas('characters', this.gameService.assetsService.getAsset('atlas/atlas.png'), this.gameService.assetsService.getAsset('atlas/atlas.json'));
-    this.load.spritesheet('tiles', this.gameService.assetsService.getAsset('tilemap/tiles-extruded-big.png'), {
-      frameWidth: 32,
-      frameHeight: 32,
-      margin: 1,
-      spacing: 2
-    });
+    this.load.atlas(
+      'characters',
+      this.gameService.assetsService.getAsset('atlas/atlas.png'),
+      this.gameService.assetsService.getAsset('atlas/atlas.json')
+    );
+
+    this.load.spritesheet(
+      'tiles',
+      this.gameService.assetsService.getAsset('tilemap/tiles-extruded-big.png'),
+      {
+        frameWidth: 32,
+        frameHeight: 32,
+        margin: 1,
+        spacing: 2
+      }
+    );
     this.load.tilemapTiledJSON('map', this.gameService.assetsService.getAsset('tilemap/map.json'));
     this.load.scenePlugin(
       'AnimatedTiles',
@@ -69,11 +75,6 @@ export class MainScene extends MyScene {
     this.load.on('progress', (progress) => {
       preloadValue.setText(100 * progress + '%');
     });
-    //
-    // let totalFiles = this.load.totalToLoad;
-    // this.load.loadEvent(function () {
-    //   preloadValue.setText(Math.round(this.load.totalComplete / totalFiles * 100) + ' %');
-    // }, this);
   }
 
   create(): void {
@@ -100,14 +101,13 @@ export class MainScene extends MyScene {
     this.walkSound.play();
     this.walkSound.pause();
 
-    let map = this.make.tilemap({key: 'map'});
+    const map = this.make.tilemap({key: 'map'});
     this.map = map;
     console.log(this);
 
-    let tiles = map.addTilesetImage('tiles', 'tiles', 32, 32, 1, 2);
+    const tiles = map.addTilesetImage('tiles', 'tiles', 32, 32, 1, 2);
 
-    let layers = [];
-    let characterObjects;
+    const layers = [];
 
     map.layers.forEach((l: LayerData, index) => {
       layers[index] = map.createDynamicLayer(index, tiles, 0, 0);
@@ -122,10 +122,10 @@ export class MainScene extends MyScene {
         layers[index].setDepth(100000);
       }
 
-      if (index == 7) {
+      if (index === 7) {
 
         map.objects.forEach(objLayer => {
-          if (objLayer.name == 'characters') objLayer.objects.forEach((obj: any) => {
+          if (objLayer.name === 'characters') objLayer.objects.forEach((obj: any) => {
 
             // let troll = new Troll(this, obj.x, obj.y, 'characters', Utils.getObjectImage(obj.gid, this.map.imageCollections));
             const troll = this.add.sprite(obj.x, obj.y, 'characters', Utils.getObjectImage(obj.gid, this.map.imageCollections));
@@ -142,24 +142,27 @@ export class MainScene extends MyScene {
             }
 
             this.trolls.push(troll);
-            // let name = obj.name;
-            //
-            // if (obj.properties && obj.properties.name) {
-            //   name = obj.properties.name;
-            // }
-            //
-            // if (obj.properties && obj.properties.type) {
-            //   name += ' \n ' + obj.properties.type;
-            // }
-            // let t = this.add.text(character[0].x, character[0].y - 45, `${name}`, {
-            //   fontSize: 20,
-            //   fontFamily: 'Connection',
-            //   align: 'center',
-            //   weight: 'bold'
-            // });
-            // t.setOrigin(0.5, 1);
-            // t.setStroke('#000', 5);
-            // // t.setScale(0.5);
+            let name = obj.name;
+
+            if (obj.properties && obj.properties.name) {
+              name = obj.properties.name;
+            }
+
+            if (obj.properties && obj.properties.type) {
+              name += ' \n ' + obj.properties.type;
+            }
+            let t = this.add.text(troll.x, troll.y - 45, `${name}`, {
+              fontSize: 20,
+              fontFamily: 'Connection',
+              align: 'center',
+              weight: 'bold'
+            });
+            t.setOrigin(0.5, 1);
+            t.setStroke('#000', 5);
+            t.setDepth(troll.depth);
+            t.setAlpha(0);
+
+            (<any>troll).nameText = t;
           });
         });
       }
@@ -172,7 +175,6 @@ export class MainScene extends MyScene {
         }
       });
     });
-
 
     this.player = this.physics.add.sprite(240, 90, 'player-atlas');
     this.player.setSize(5, 3);
@@ -207,13 +209,11 @@ export class MainScene extends MyScene {
       frames: this.anims.generateFrameNumbers('player-atlas', {start: 18, end: 23}),
     };
 
-
     const idleWalkUpCfg = {
       ...configDef,
       key: 'idle',
       frames: this.anims.generateFrameNumbers('player-atlas', {start: 0, end: 0}),
     };
-
 
     this.anims.create(animWalkDownCfg);
     this.anims.create(animWalkLeftCfg);
@@ -221,11 +221,10 @@ export class MainScene extends MyScene {
     this.anims.create(animWalkRightCfg);
     this.anims.create(idleWalkUpCfg);
 
-
     let pathLayer;
 
     layers.forEach((l: Phaser.Tilemaps.DynamicTilemapLayer, i) => {
-      if (l.layer.name == 'path') {
+      if (l.layer.name === 'path') {
         pathLayer = l;
         l.alpha = 0;
         this.physics.add.collider(this.player, l, null, null, null);
@@ -237,7 +236,6 @@ export class MainScene extends MyScene {
     this.animatedTiles.init(map);
 
     this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
-    // this.cameras.main.setZoom(0.5);
     this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
     this.physics.world.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
 
@@ -255,7 +253,6 @@ export class MainScene extends MyScene {
       }
     });
     this.vj.setScrollFactor(0);
-
 
     this.input.on('pointerdown', (pointer) => {
       this.vj.show(pointer.downX, pointer.downY);
@@ -308,14 +305,13 @@ export class MainScene extends MyScene {
 
 
   saveData() {
-    let data = {
+    const data = {
       player: {
         x: this.player.x,
         y: this.player.y
       },
       shadow: [...this.shadowExploreData]
     };
-
     localStorage.setItem('savedData', JSON.stringify(data));
   }
 
@@ -342,32 +338,28 @@ export class MainScene extends MyScene {
     this.player.body.setVelocityX(0);
     this.player.body.setVelocityY(0);
 
-    let pointer = this.input.activePointer;
-
-    // let overlappingTiles = this.map.getTilesWithinShape(this.areas[0]);
-
-    // let overlappingTiles = this.map.getTilesWithinWorldXY(this.player.x - 20, this.player.y - 20, 40, 40);
-    let overlappingTiles = this.map.getTilesWithinShape(new Phaser.Geom.Circle(this.player.x, this.player.y, 50), {isNotEmpty: true});
-    overlappingTiles.forEach((tile: Phaser.Tilemaps.Tile) => {
-
+    const overlappingTilesShape = this.map.getTilesWithinShape(
+      new Phaser.Geom.Circle(this.player.x, this.player.y, 50),
+      {isNotEmpty: true}
+    );
+    overlappingTilesShape.forEach((tile: Phaser.Tilemaps.Tile) => {
       this.exploreShadowTile(tile);
     });
 
     this.areas.map(area => {
+
       if (!area.explored) {
-        let point = new Phaser.Geom.Point(this.player.x, this.player.y);
+        const point = new Phaser.Geom.Point(this.player.x, this.player.y);
+
         if (Phaser.Geom.Rectangle.ContainsPoint(area, point)) {
-          let overlappingTiles = this.map.getTilesWithinWorldXY(area.x, area.y, area.width, area.height);
+          const overlappingTiles = this.map.getTilesWithinWorldXY(area.x, area.y, area.width, area.height);
           overlappingTiles.forEach((tile: Phaser.Tilemaps.Tile) => {
             area.explored = true;
-
             this.exploreShadowTile(tile);
-
           });
         }
       }
     });
-
 
     if (!this.vj.isOn) {
       this.movementValues = {x: 0, y: 0};
@@ -412,28 +404,19 @@ export class MainScene extends MyScene {
       this.player.body.setVelocityY(this.movementValues.y * SPEED);
     }
 
-    if ((this.player.body.velocity.x != 0 || this.player.body.velocity.y != 0) && this.walkSound.isPaused) {
+    if ((this.player.body.velocity.x !== 0 || this.player.body.velocity.y !== 0) && this.walkSound.isPaused) {
       this.walkSound.play();
-    } else if (this.player.body.velocity.x == 0 && this.player.body.velocity.y == 0) {
+    } else if (this.player.body.velocity.x === 0 && this.player.body.velocity.y === 0) {
       this.walkSound.pause();
     }
 
-    if (this.movementValues.x < 0 && this.player.lastAnim != 'walk-left') {
+    if (this.movementValues.x < 0 && this.player.lastAnim !== 'walk-left') {
       this.player.anims.play('walk-left');
       this.player.lastAnim = 'walk-left';
-    } else if (this.player.body.velocity.x > 0 && this.player.lastAnim != 'walk-right') {
+    } else if (this.player.body.velocity.x > 0 && this.player.lastAnim !== 'walk-right') {
       this.player.anims.play('walk-right');
       this.player.lastAnim = 'walk-right';
     }
-
-    //
-    // if (this.movementValues.y < 0 && this.player.lastAnim != 'walk-up') {
-    //   this.player.anims.play('walk-up');
-    //   this.player.lastAnim = 'walk-up'
-    // } else if (this.player.body.velocity.y > 0 && this.player.lastAnim != 'walk-down') {
-    //   this.player.anims.play('walk-down');
-    //   this.player.lastAnim = 'walk-down'
-    // }
 
     if (this.movementValues.x === 0 && this.movementValues.y === 0) {
       this.player.anims.play('idle');
@@ -441,7 +424,11 @@ export class MainScene extends MyScene {
     } else {
       this.trolls.forEach(troll => {
 
-        if (!troll.talk && Phaser.Math.Distance.Between(this.player.x, this.player.y, troll.x, troll.y) <= (<any>troll).interactionRadius) {
+        const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, troll.x, troll.y);
+
+        (<any>troll).nameText.setAlpha(1 - distance / 100);
+
+        if (!troll.talk && distance <= (<any>troll).interactionRadius) {
 
           troll.talk = true;
           this.vj.hide();
@@ -456,13 +443,10 @@ export class MainScene extends MyScene {
         if (troll.talk && Phaser.Math.Distance.Between(this.player.x, this.player.y, troll.x, troll.y) > (<any>troll).interactionRadius) {
           troll.talk = false;
         }
-
       });
     }
 
     this.player.setDepth(this.player.y);
-
   }
-
 }
 
