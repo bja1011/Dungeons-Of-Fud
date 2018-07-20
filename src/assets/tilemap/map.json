@@ -90,20 +90,18 @@
                  "properties":
                     {
                      "fud":"1",
-                     "name":"Ran NeuNer \n XRP Troll",
-                     "type":"(3)"
+                     "id":1
                     },
                  "propertytypes":
                     {
                      "fud":"string",
-                     "name":"string",
-                     "type":"string"
+                     "id":"int"
                     },
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":48,
-                 "x":522.556,
+                 "x":534.556,
                  "y":417.833
                 }, 
                 {
@@ -111,6 +109,14 @@
                  "height":60,
                  "id":19,
                  "name":"",
+                 "properties":
+                    {
+                     "id":3
+                    },
+                 "propertytypes":
+                    {
+                     "id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,
@@ -123,6 +129,14 @@
                  "height":60,
                  "id":21,
                  "name":"",
+                 "properties":
+                    {
+                     "id":2
+                    },
+                 "propertytypes":
+                    {
+                     "id":"int"
+                    },
                  "rotation":0,
                  "type":"",
                  "visible":true,

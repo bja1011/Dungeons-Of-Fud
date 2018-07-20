@@ -5,6 +5,10 @@ import * as dat from 'dat.gui';
 import {MyGame} from '../components/play-game/play-game.component';
 import {MyScene} from '../classes/MyScene';
 import * as Utils from './../utils/utils';
+import {getTroll} from '../constants/data';
+import * as configs from '../constants/configs';
+import {TrollpediaComponent} from '../components/trollpedia/trollpedia.component';
+import {ConversationComponent} from '../components/conversation/conversation.component';
 
 const SPEED = 90;
 
@@ -82,22 +86,10 @@ export class MainScene extends MyScene {
     this.events.on('resize', this.resize, this);
     this.animatedTiles = this['animatedTiles'];
 
-    const music = this.sound.add('bg-music', {
-      mute: true,
-      volume: 1,
-      rate: 1,
-      detune: 0,
-      seek: 0,
-      loop: false,
-      delay: 0
-    });
+    const music = this.sound.add('bg-music', configs.music);
     music.play();
 
-    this.walkSound = this.sound.add('walk', {
-      volume: 0.1,
-      rate: 1,
-      loop: true
-    });
+    this.walkSound = this.sound.add('walk', configs.walkSound);
     this.walkSound.play();
     this.walkSound.pause();
 
@@ -112,12 +104,6 @@ export class MainScene extends MyScene {
     map.layers.forEach((l: LayerData, index) => {
       layers[index] = map.createDynamicLayer(index, tiles, 0, 0);
 
-      console.log(l.name === 'characters');
-      {
-        this.charactersLayer = layers[index];
-        console.log(this.charactersLayer);
-      }
-
       if (l.name === 'shadow') {
         layers[index].setDepth(100000);
       }
@@ -127,6 +113,7 @@ export class MainScene extends MyScene {
         map.objects.forEach(objLayer => {
           if (objLayer.name === 'characters') objLayer.objects.forEach((obj: any) => {
 
+            const trollData = getTroll(obj.properties.id);
             // let troll = new Troll(this, obj.x, obj.y, 'characters', Utils.getObjectImage(obj.gid, this.map.imageCollections));
             const troll = this.add.sprite(obj.x, obj.y, 'characters', Utils.getObjectImage(obj.gid, this.map.imageCollections));
             troll.setOrigin(0.5, 1);
@@ -142,27 +129,26 @@ export class MainScene extends MyScene {
             }
 
             this.trolls.push(troll);
-            let name = obj.name;
+            const name = trollData.name;
 
-            if (obj.properties && obj.properties.name) {
-              name = obj.properties.name;
-            }
+            // if (obj.properties && obj.properties.name) {
+            //   name = obj.properties.name;
+            // }
 
-            if (obj.properties && obj.properties.type) {
-              name += ' \n ' + obj.properties.type;
-            }
-            let t = this.add.text(troll.x, troll.y - 45, `${name}`, {
-              fontSize: 20,
+            // if (obj.properties && obj.properties.type) {
+            //   name += ' \n ' + obj.properties.type;
+            // }
+            const trollNameText = this.add.text(troll.x, troll.y - 65, `${name} \n XRP Troll`, {
+              fontSize: 17,
               fontFamily: 'Connection',
               align: 'center',
-              weight: 'bold'
             });
-            t.setOrigin(0.5, 1);
-            t.setStroke('#000', 5);
-            t.setDepth(troll.depth);
-            t.setAlpha(0);
+            trollNameText.setOrigin(0.5, 1);
+            trollNameText.setStroke('#000', 5);
+            trollNameText.setDepth(troll.depth);
+            trollNameText.setAlpha(0);
 
-            (<any>troll).nameText = t;
+            (<any>troll).nameText = trollNameText;
           });
         });
       }
@@ -290,11 +276,13 @@ export class MainScene extends MyScene {
       }
     }
 
-    const gui = new dat.GUI();
-    gui.closed = true;
-    gui.add(this, 'resetGame');
-    gui.add(this.sound, 'mute');
-    gui.add(this, 'saveData');
+    if ((<MyGame>this.sys.game).debug) {
+      const gui = new dat.GUI();
+      gui.closed = true;
+      gui.add(this, 'resetGame');
+      gui.add(this.sound, 'mute');
+      gui.add(this, 'saveData');
+    }
   }
 
   resetGame() {
@@ -302,7 +290,6 @@ export class MainScene extends MyScene {
     localStorage.removeItem('savedData');
     location.reload();
   }
-
 
   saveData() {
     const data = {
@@ -432,7 +419,7 @@ export class MainScene extends MyScene {
 
           troll.talk = true;
           this.vj.hide();
-          const dialogRef = this.gameService.dialogService.open();
+          const dialogRef = this.gameService.dialogService.open(ConversationComponent);
           this.player.stopped = true;
 
           dialogRef.afterClosed().subscribe(result => {

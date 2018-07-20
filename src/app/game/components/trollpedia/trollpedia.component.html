@@ -1,3 +1,5 @@
-<p>
-  trollpedia works!
-</p>
+<mat-grid-list cols="2" rowHeight="1:1">
+  <mat-grid-tile *ngFor="let troll of trolls">
+    {{troll.name}}
+  </mat-grid-tile>
+</mat-grid-list>

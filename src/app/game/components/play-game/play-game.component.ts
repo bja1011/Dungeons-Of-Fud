@@ -4,6 +4,7 @@ import {GameService} from '../../providers/game.service';
 import {AssetsService} from '../../../providers/assets.service';
 import {MainScene} from '../../scenes/MainScene';
 import {BootScene} from '../../scenes/Boot.scene';
+import {MenuComponent} from '../menu/menu.component';
 
 @Component({
   selector: 'app-play-game',
@@ -12,8 +13,7 @@ import {BootScene} from '../../scenes/Boot.scene';
 })
 export class PlayGameComponent implements OnInit {
 
-  constructor(private gameService: GameService,
-              private assetsService: AssetsService,) {
+  constructor(private gameService: GameService,) {
   }
 
   ngOnInit() {
@@ -43,9 +43,13 @@ export class PlayGameComponent implements OnInit {
       (<MyGame>this.gameService.game).debug = true;
     }
 
-    window.addEventListener('resize', (event) => {
+    window.addEventListener('resize', () => {
       this.gameService.game.resize(window.innerWidth, window.innerHeight);
     }, false);
+  }
+
+  openMenu() {
+    this.gameService.dialogService.open(MenuComponent);
   }
 
 }

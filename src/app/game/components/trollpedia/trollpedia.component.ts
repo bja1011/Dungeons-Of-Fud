@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {trolls} from '../../constants/data';
 
 @Component({
   selector: 'app-trollpedia',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrollpediaComponent implements OnInit {
 
-  constructor() { }
+  trolls: any[] = trolls;
 
   ngOnInit() {
   }
