@@ -36,12 +36,11 @@ export const fuds = [
   },
   {
     id: 3,
-    name: 'https://fudbingo.com/ripple-can-freeze-your-coins',
-    bingoUrl: 'Ripple can freeze your coins'
+    name: 'Ripple can freeze your coins',
+    bingoUrl: 'https://fudbingo.com/ripple-can-freeze-your-coins'
   }
 ];
 
 export function getFud(id: number) {
   return fuds.find(fud => fud.id === id);
 }
-

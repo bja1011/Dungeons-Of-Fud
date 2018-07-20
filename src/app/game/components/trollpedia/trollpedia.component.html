@@ -1,5 +1,8 @@
 <mat-grid-list cols="2" rowHeight="1:1">
   <mat-grid-tile *ngFor="let troll of trolls">
-    {{troll.name}}
+    <div class="text-center troll-item" [class.explored]="troll.explored">
+      <img [src]="assetsService.getAsset('atlas/troll-'+(troll.expplored ? troll.id : 'unknown')+'.png')">
+      <div>{{troll.explored ? troll.name : "unknown"}}</div>
+    </div>
   </mat-grid-tile>
 </mat-grid-list>

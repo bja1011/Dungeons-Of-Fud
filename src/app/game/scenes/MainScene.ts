@@ -119,6 +119,7 @@ export class MainScene extends MyScene {
             troll.setOrigin(0.5, 1);
             troll.setDepth(troll.y);
             (<any>troll).interactionRadius = 30;
+            (<any>troll).trollId = obj.properties.id;
 
             if ((<MyGame>this.sys.game).debug) {
               const g = this.add.graphics();
@@ -419,7 +420,16 @@ export class MainScene extends MyScene {
 
           troll.talk = true;
           this.vj.hide();
-          const dialogRef = this.gameService.dialogService.open(ConversationComponent);
+          const dialogRef = this.gameService.dialogService.open(
+            ConversationComponent,
+            {
+              data: {
+                trollId: (<any>troll).trollId
+
+              }
+            }
+            )
+          ;
           this.player.stopped = true;
 
           dialogRef.afterClosed().subscribe(result => {

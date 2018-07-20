@@ -10,11 +10,7 @@ export class DialogService {
   }
 
   public open(component, config?) {
-    return this.dialog.open(component, {...defaultDialogConfig, config});
+    return this.dialog.open(component, config);
   }
 }
 
-const defaultDialogConfig: any = {
-  height: '400px',
-  width: '300px',
-};

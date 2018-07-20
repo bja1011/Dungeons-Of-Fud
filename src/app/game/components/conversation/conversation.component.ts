@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material';
+import {getFud, getTroll, trolls} from '../../constants/data';
 
 @Component({
   selector: 'app-conversation',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConversationComponent implements OnInit {
 
-  constructor() { }
+  troll: any;
+  fud: any;
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+  }
 
   ngOnInit() {
+    this.troll = getTroll(this.data.trollId);
+    this.fud = getFud(this.troll.fudIds[0]);
   }
 
 }
