@@ -32,6 +32,12 @@ canvas {
   color: #fff;
 }
 
+.fud-view-dialog {
+  .mat-dialog-container {
+    padding: 0px;
+  }
+}
+
 button {
   background: $primary-color !important;
   border-radius: 0;

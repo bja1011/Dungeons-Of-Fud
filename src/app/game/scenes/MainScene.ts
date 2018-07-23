@@ -163,7 +163,7 @@ export class MainScene extends MyScene {
       });
     });
 
-    this.player = this.physics.add.sprite(240, 90, 'player-atlas');
+    this.player = this.physics.add.sprite(140, 90, 'player-atlas');
     this.player.setSize(5, 3);
     this.player.setOrigin(0.5, 1);
 
@@ -286,13 +286,13 @@ export class MainScene extends MyScene {
     }
   }
 
-  resetGame() {
+  public resetGame() {
     this.disableSave = true;
     localStorage.removeItem('savedData');
     location.reload();
   }
 
-  saveData() {
+  public saveData() {
     const data = {
       player: {
         x: this.player.x,
@@ -423,6 +423,7 @@ export class MainScene extends MyScene {
           const dialogRef = this.gameService.dialogService.open(
             ConversationComponent,
             {
+              maxHeight: '500px',
               data: {
                 trollId: (<any>troll).trollId
 

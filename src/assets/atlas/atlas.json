@@ -4,7 +4,7 @@
 			"image": "atlas.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 150,
+				"w": 190,
 				"h": 62
 			},
 			"scale": 1,
@@ -71,6 +71,27 @@
 						"w": 42,
 						"h": 54
 					}
+				},
+				{
+					"filename": "troll-4.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 49,
+						"h": 56
+					},
+					"spriteSourceSize": {
+						"x": 6,
+						"y": 1,
+						"w": 38,
+						"h": 54
+					},
+					"frame": {
+						"x": 151,
+						"y": 1,
+						"w": 38,
+						"h": 54
+					}
 				}
 			]
 		}
@@ -78,6 +99,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:37e5c054903faf425281666b193f21ff:5d72a165a20b5132ed07a79ac2d0970d:cbce6b53f0f49e0bf15173c25c41f876$"
+		"smartupdate": "$TexturePacker:SmartUpdate:58fd1a6f9c8aef2e266ec58566133f32:e232f9c252ef13b957a4448ddadd110a:cbce6b53f0f49e0bf15173c25c41f876$"
 	}
 }

@@ -5,6 +5,8 @@ import {TrollpediaComponent} from './components/trollpedia/trollpedia.component'
 import {MyMaterialModule} from '../my-material/my-material.module';
 import {MenuComponent} from './components/menu/menu.component';
 import {ConversationComponent} from './components/conversation/conversation.component';
+import {SafePipe} from '../safe.pipe';
+import {FudViewComponent} from './components/fud-view/fud-view.component';
 
 @NgModule({
   imports: [
@@ -18,12 +20,15 @@ import {ConversationComponent} from './components/conversation/conversation.comp
     TrollpediaComponent,
     MenuComponent,
     ConversationComponent,
+    FudViewComponent,
   ],
   declarations: [
     PlayGameComponent,
     TrollpediaComponent,
     MenuComponent,
     ConversationComponent,
+    SafePipe,
+    FudViewComponent,
   ]
 })
 export class GameModule {

@@ -16,6 +16,12 @@ export const trolls = [
     name: 'Lawson',
     level: 3,
     fudIds: [2]
+  },
+  {
+    id: 99,
+    name: 'David',
+    level: '??',
+    fudIds: [99]
   }
 ];
 
@@ -38,6 +44,13 @@ export const fuds = [
     id: 3,
     name: 'Ripple can freeze your coins',
     bingoUrl: 'https://fudbingo.com/ripple-can-freeze-your-coins'
+  },
+  {
+    id: 99,
+    name: `Hello brave Zerparian! <br> Help us fight the FUDs that are spreading by the trolls from the dungeons.`,
+    confirmText: 'Thank You!',
+    bingoUrl: 'https://fudbingo.com/ripple-can-freeze-your-coins'
+
   }
 ];
 

@@ -208,12 +208,26 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">troll-4.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>12,14,25,28</rect>
+                <key>scale9Paddings</key>
+                <rect>12,14,25,28</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
         </map>
         <key>fileList</key>
         <array>
             <filename>troll-1.png</filename>
             <filename>troll-2.png</filename>
             <filename>troll-3.png</filename>
+            <filename>troll-4.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

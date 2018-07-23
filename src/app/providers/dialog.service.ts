@@ -1,16 +1,21 @@
 import {Injectable} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatSnackBar, MatSnackBarConfig} from '@angular/material';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog,
+              public snackBar: MatSnackBar) {
   }
 
-  public open(component, config?) {
+  public open(component, config?: MatDialogConfig) {
     return this.dialog.open(component, config);
+  }
+
+  showSnackBar(message: string, action: string, config?: MatSnackBarConfig) {
+    this.snackBar.open(message, action, config);
   }
 }
 

@@ -5,7 +5,7 @@ import {
   MatDialogModule,
   MatExpansionModule, MatGridListModule,
   MatIconModule,
-  MatListModule,
+  MatListModule, MatSnackBarModule,
   MatToolbarModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -20,6 +20,7 @@ const usedModules = [
   MatCheckboxModule,
   MatListModule,
   MatGridListModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({

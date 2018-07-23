@@ -7,6 +7,7 @@ import {GameModule} from './game/game.module';
 import {PlayGameComponent} from './game/components/play-game/play-game.component';
 import {MyMaterialModule} from './my-material/my-material.module';
 import {AssetsService} from './providers/assets.service';
+import { SafePipe } from './safe.pipe';
 
 const appRoutes: Routes = [
   {path: '', component: PlayGameComponent},
@@ -14,7 +15,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
