@@ -1,2 +1,2 @@
-<iframe [src]="fudUrl | safe"></iframe>
-<button mat-raised-button (click)="dialogRef.close()">Use this knowledge!</button>
+<iframe *ngIf="fudUrl" [src]="fudUrl | safe" (load)="onLoad($event)"></iframe>
+<button *ngIf="showButton" mat-raised-button (click)="dialogRef.close('confirmed')">Use this knowledge!</button>

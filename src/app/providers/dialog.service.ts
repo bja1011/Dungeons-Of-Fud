@@ -17,5 +17,9 @@ export class DialogService {
   showSnackBar(message: string, action: string, config?: MatSnackBarConfig) {
     this.snackBar.open(message, action, config);
   }
+
+  closeAll() {
+    this.dialog.closeAll();
+  }
 }
 

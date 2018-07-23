@@ -4,11 +4,11 @@
   </h3>
   <p [innerHTML]="fud.name"></p>
 
-  <ng-container *ngIf="fud.id == 99">
+  <div class="text-center" *ngIf="fud.id == 99">
     <button mat-button (click)="dialogRef.close()">{{fud.confirmText}}</button>
-  </ng-container>
+  </div>
 
-  <ng-container *ngIf="fud.id">
+  <div class="text-center" *ngIf="fud.id">
     <button mat-button (click)="showFudUrl(fud.bingoUrl)">Open FUD Manuscript</button>
-  </ng-container>
+  </div>
 </div>

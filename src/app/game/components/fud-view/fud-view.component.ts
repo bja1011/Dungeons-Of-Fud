@@ -9,6 +9,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 export class FudViewComponent implements OnInit {
 
   fudUrl: string;
+  showButton = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               public dialogRef: MatDialogRef<FudViewComponent>) {
@@ -16,6 +17,12 @@ export class FudViewComponent implements OnInit {
 
   ngOnInit() {
     this.fudUrl = this.data.fudUrl;
+  }
+
+  onLoad(event) {
+    setTimeout(() => {
+      this.showButton = true;
+    }, 1000);
   }
 
 }

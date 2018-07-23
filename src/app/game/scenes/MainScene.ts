@@ -425,12 +425,28 @@ export class MainScene extends MyScene {
             {
               maxHeight: '500px',
               data: {
-                trollId: (<any>troll).trollId
+                trollId: (<any>troll).trollId,
+                confirmCallback: () => {
+
+                  (<any>troll).interactionRadius = 0;
+                  setTimeout(() => {
+                    (<any>troll).nameText.setText((<any>troll).nameText.text.replace('XRP Troll', 'Converted Supporter'));
+                  }, 3000);
+
+                  this.tweens.add({
+                    targets: troll,
+                    x: troll.x + 7,
+                    duration: 50,
+                    yoyo: true,
+                    repeat: 30
+                  });
+
+                }
 
               }
             }
-            )
-          ;
+          );
+
           this.player.stopped = true;
 
           dialogRef.afterClosed().subscribe(result => {

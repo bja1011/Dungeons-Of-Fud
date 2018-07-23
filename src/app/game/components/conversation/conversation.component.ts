@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {getFud, getTroll, trolls} from '../../constants/data';
-import {DomSanitizer} from '@angular/platform-browser';
+import {getFud, getTroll} from '../../constants/data';
 import {DialogService} from '../../../providers/dialog.service';
 import {FudViewComponent} from '../fud-view/fud-view.component';
 
@@ -32,13 +31,12 @@ export class ConversationComponent implements OnInit {
     }
 
     this.dialogRef.afterClosed()
-      .subscribe(() => {
-        this.confirmCallback();
+      .subscribe((a) => {
       });
   }
 
   showFudUrl(fudUrl: string) {
-    this.dialogService.open(FudViewComponent, {
+    const fudDialogRef = this.dialogService.open(FudViewComponent, {
       width: '100%',
       maxWidth: '100%',
       height: '100%',
@@ -47,6 +45,15 @@ export class ConversationComponent implements OnInit {
         fudUrl
       }
     });
+
+    fudDialogRef.afterClosed()
+      .subscribe((response: string) => {
+        this.dialogService.closeAll();
+
+        if (response === 'confirmed' && this.confirmCallback) {
+          this.confirmCallback();
+        }
+      });
   }
 
 }
