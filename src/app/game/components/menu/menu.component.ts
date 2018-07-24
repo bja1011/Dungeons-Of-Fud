@@ -12,6 +12,8 @@ import {MatDialogRef} from '@angular/material';
 })
 export class MenuComponent implements OnInit {
 
+  muteSounds: boolean;
+
   constructor(private dialogService: DialogService,
               private gameService: GameService,
               private dialogRef: MatDialogRef<MenuComponent>,) {
@@ -32,6 +34,10 @@ export class MenuComponent implements OnInit {
   resetGame() {
     const scene = this.gameService.game.scene.getScene('MainScene');
     (<MainScene>scene).resetGame();
+  }
+
+  mute() {
+    console.log(this.muteSounds)
   }
 
   openTrollopedia() {

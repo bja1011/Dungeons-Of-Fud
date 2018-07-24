@@ -7,11 +7,13 @@ import {MenuComponent} from './components/menu/menu.component';
 import {ConversationComponent} from './components/conversation/conversation.component';
 import {SafePipe} from '../safe.pipe';
 import {FudViewComponent} from './components/fud-view/fud-view.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     MyMaterialModule,
+    FormsModule,
   ],
   exports: [
     PlayGameComponent,

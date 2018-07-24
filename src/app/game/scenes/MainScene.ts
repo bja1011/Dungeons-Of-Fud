@@ -7,7 +7,6 @@ import {MyScene} from '../classes/MyScene';
 import * as Utils from './../utils/utils';
 import {getTroll} from '../constants/data';
 import * as configs from '../constants/configs';
-import {TrollpediaComponent} from '../components/trollpedia/trollpedia.component';
 import {ConversationComponent} from '../components/conversation/conversation.component';
 
 const SPEED = 90;
@@ -55,6 +54,11 @@ export class MainScene extends MyScene {
       this.gameService.assetsService.getAsset('atlas/atlas.json')
     );
 
+    this.load.spritesheet('puff-anim', this.gameService.assetsService.getAsset('anims/puff.png'), {
+      frameWidth: 128,
+      frameHeight: 128,
+    });
+
     this.load.spritesheet(
       'tiles',
       this.gameService.assetsService.getAsset('tilemap/tiles-extruded-big.png'),
@@ -74,6 +78,7 @@ export class MainScene extends MyScene {
     );
     this.load.audio('bg-music', this.gameService.assetsService.getAsset('sounds/bg-music.mp3'));
     this.load.audio('walk', this.gameService.assetsService.getAsset('sounds/walk.mp3'));
+    this.load.audio('heal', this.gameService.assetsService.getAsset('sounds/healspell1.mp3'));
     this.load.spritesheet('player-atlas', this.gameService.assetsService.getAsset('hero-atlas.png'), {frameWidth: 32, frameHeight: 32});
 
     this.load.on('progress', (progress) => {
@@ -131,6 +136,29 @@ export class MainScene extends MyScene {
 
             this.trolls.push(troll);
             const name = trollData.name;
+
+            const puff = this.add.sprite(troll.x, troll.y, 'puff-anim', 0);
+            puff.setOrigin(0.5, 0.7);
+
+            const trollPuff = {
+              ...configDef,
+              key: 'puff',
+              duration: 3,
+              frameRate: 9,
+              frames: this.anims.generateFrameNumbers('puff-anim', {start: 0, end: 3}),
+            };
+            this.anims.create(trollPuff);
+            puff.alpha = 0;
+            puff.on('animationcomplete', (animation, frame) => {
+              console.log(animation, frame);
+              puff.alpha = 0;
+            });
+            puff.depth = troll.depth + 1;
+
+
+            (<any>troll).convertAnimSprite = puff;
+            (<any>troll).puffSound = this.sound.add('heal', configs.heal);
+
 
             // if (obj.properties && obj.properties.name) {
             //   name = obj.properties.name;
@@ -431,18 +459,22 @@ export class MainScene extends MyScene {
                   (<any>troll).interactionRadius = 0;
                   setTimeout(() => {
                     (<any>troll).nameText.setText((<any>troll).nameText.text.replace('XRP Troll', 'Converted Supporter'));
-                  }, 3000);
+                  }, 2000);
 
                   this.tweens.add({
                     targets: troll,
                     x: troll.x + 7,
                     duration: 50,
                     yoyo: true,
-                    repeat: 30
+                    repeat: 30,
+                    onComplete: () => {
+                      (<any>troll).convertAnimSprite.alpha = 1;
+                      (<any>troll).convertAnimSprite.play('puff');
+                      (<any>troll).puffSound.play();
+
+                    }
                   });
-
                 }
-
               }
             }
           );
