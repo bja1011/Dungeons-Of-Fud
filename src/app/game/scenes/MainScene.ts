@@ -100,7 +100,6 @@ export class MainScene extends MyScene {
 
     const map = this.make.tilemap({key: 'map'});
     this.map = map;
-    console.log(this);
 
     const tiles = map.addTilesetImage('tiles', 'tiles', 32, 32, 1, 2);
 

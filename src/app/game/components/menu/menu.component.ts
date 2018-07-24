@@ -12,7 +12,7 @@ import {MatDialogRef} from '@angular/material';
 })
 export class MenuComponent implements OnInit {
 
-  muteSounds: boolean;
+  muteSounds: boolean = true;
 
   constructor(private dialogService: DialogService,
               private gameService: GameService,
@@ -20,6 +20,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.mute();
   }
 
   saveGame() {
@@ -37,7 +38,7 @@ export class MenuComponent implements OnInit {
   }
 
   mute() {
-    console.log(this.muteSounds)
+    this.gameService.game.sound.mute = this.muteSounds;
   }
 
   openTrollopedia() {
