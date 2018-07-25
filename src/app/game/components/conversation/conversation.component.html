@@ -5,7 +5,7 @@
   <p [innerHTML]="fud.name"></p>
 
   <div class="text-center" *ngIf="fud.id == 99">
-    <button mat-button (click)="dialogRef.close()">{{fud.confirmText}}</button>
+    <button mat-button (click)="dialogRef.close(troll)">{{fud.confirmText}}</button>
   </div>
 
   <div class="text-center" *ngIf="fud.id != 99">

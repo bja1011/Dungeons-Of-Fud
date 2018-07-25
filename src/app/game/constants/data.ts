@@ -3,25 +3,33 @@ export const trolls = [
     id: 1,
     name: 'Mullick',
     level: 3,
-    fudIds: [3]
+    fudIds: [3],
+    converted: false,
+    explored: false,
   },
   {
     id: 2,
     name: 'Shinobi',
     level: 3,
-    fudIds: [1]
+    fudIds: [1],
+    converted: false,
+    explored: false,
   },
   {
     id: 3,
     name: 'Lawson',
     level: 3,
-    fudIds: [2]
+    fudIds: [2],
+    converted: false,
+    explored: false,
   },
   {
     id: 99,
     name: 'David',
     level: '??',
-    fudIds: [99]
+    fudIds: [99],
+    converted: false,
+    explored: false,
   }
 ];
 
@@ -48,7 +56,7 @@ export const fuds = [
   {
     id: 99,
     name: `Hello brave Zerparian! <br> Help us fight the FUDs that are spreading by the trolls from the dungeons.`,
-    confirmText: 'Thank You!',
+    confirmText: 'I will help!',
     bingoUrl: 'https://fudbingo.com/ripple-can-freeze-your-coins'
 
   }

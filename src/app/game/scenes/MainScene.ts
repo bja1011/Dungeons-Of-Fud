@@ -5,7 +5,7 @@ import * as dat from 'dat.gui';
 import {MyGame} from '../components/play-game/play-game.component';
 import {MyScene} from '../classes/MyScene';
 import * as Utils from './../utils/utils';
-import {getTroll} from '../constants/data';
+import {getTroll, trolls} from '../constants/data';
 import * as configs from '../constants/configs';
 import {ConversationComponent} from '../components/conversation/conversation.component';
 
@@ -124,6 +124,7 @@ export class MainScene extends MyScene {
             troll.setDepth(troll.y);
             (<any>troll).interactionRadius = 30;
             (<any>troll).trollId = obj.properties.id;
+            (<any>troll).trollDataRef = trollData;
 
             if ((<MyGame>this.sys.game).debug) {
               const g = this.add.graphics();
@@ -302,6 +303,15 @@ export class MainScene extends MyScene {
           });
         });
       }
+
+      // if (savedData.trolls) {
+      //   console.log(savedData.trolls)
+      //   this.trolls.map(trollSprite => {
+      //     let trollData = trolls.find(troll => troll.id == trollSprite.trollDataRef.id);
+      //   });
+      // }
+
+      console.log(trolls)
     }
 
     if ((<MyGame>this.sys.game).debug) {
@@ -325,7 +335,8 @@ export class MainScene extends MyScene {
         x: this.player.x,
         y: this.player.y
       },
-      shadow: [...this.shadowExploreData]
+      shadow: [...this.shadowExploreData],
+      trolls: trolls
     };
     localStorage.setItem('savedData', JSON.stringify(data));
   }
@@ -443,7 +454,9 @@ export class MainScene extends MyScene {
 
         (<any>troll).nameText.setAlpha(1 - distance / 100);
 
-        if (!troll.talk && distance <= (<any>troll).interactionRadius) {
+        if (!troll.talk && distance <= (<any>troll).interactionRadius && !(<any>troll).trollDataRef.converted) {
+
+          (<any>troll).trollDataRef.explored = true;
 
           troll.talk = true;
           this.vj.hide();
@@ -470,6 +483,7 @@ export class MainScene extends MyScene {
                       (<any>troll).convertAnimSprite.alpha = 1;
                       (<any>troll).convertAnimSprite.play('puff');
                       (<any>troll).puffSound.play();
+                      (<any>troll).trollDataRef.converted = true;
 
                     }
                   });
@@ -482,6 +496,10 @@ export class MainScene extends MyScene {
 
           dialogRef.afterClosed().subscribe(result => {
             this.player.stopped = false;
+            console.log(result);
+            if (result && result.id == 99) {
+              result.converted = true;
+            }
           });
         }
 
