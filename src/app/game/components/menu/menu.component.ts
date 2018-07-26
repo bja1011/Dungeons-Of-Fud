@@ -12,7 +12,7 @@ import {MatDialogRef} from '@angular/material';
 })
 export class MenuComponent {
 
-  muteSounds = true;
+  muteSounds = this.gameService.game.sound.mute;
 
   constructor(private dialogService: DialogService,
               private gameService: GameService,

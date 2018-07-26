@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 @Component({
@@ -6,7 +6,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
   templateUrl: './fud-view.component.html',
   styleUrls: ['./fud-view.component.scss']
 })
-export class FudViewComponent implements OnInit {
+export class FudViewComponent implements OnInit, AfterViewInit {
 
   fudUrl: string;
   showButton = false;
@@ -22,7 +22,14 @@ export class FudViewComponent implements OnInit {
   onLoad(event) {
     setTimeout(() => {
       this.showButton = true;
-    }, 1000);
+    }, 10000);
+  }
+
+  ngAfterViewInit() {
+    const iframe = document.querySelector('iframe');
+    iframe.onload = (event) => {
+      this.showButton = true;
+    };
   }
 
 }
