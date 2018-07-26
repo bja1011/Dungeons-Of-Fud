@@ -505,8 +505,8 @@ export class MainScene extends MyScene {
           });
         }
 
-        if (troll.talk && Phaser.Math.Distance.Between(this.player.x, this.player.y, troll.x, troll.y) > (<any>troll).interactionRadius) {
-          troll.talk = false;
+        if ((<any>troll).talk && Phaser.Math.Distance.Between(this.player.x, this.player.y, troll.x, troll.y) > (<any>troll).interactionRadius) {
+          (<any>troll).talk = false;
         }
       });
     }

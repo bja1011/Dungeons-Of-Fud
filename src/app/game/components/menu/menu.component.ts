@@ -16,7 +16,7 @@ export class MenuComponent {
 
   constructor(private dialogService: DialogService,
               private gameService: GameService,
-              private dialogRef: MatDialogRef<MenuComponent>,) {
+              public dialogRef: MatDialogRef<MenuComponent>,) {
   }
 
   saveGame() {
