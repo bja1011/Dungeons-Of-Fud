@@ -10,21 +10,17 @@ import {MatDialogRef} from '@angular/material';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent {
 
-  muteSounds: boolean = true;
+  muteSounds = true;
 
   constructor(private dialogService: DialogService,
               private gameService: GameService,
               private dialogRef: MatDialogRef<MenuComponent>,) {
   }
 
-  ngOnInit() {
-    this.mute();
-  }
-
   saveGame() {
-    let scene = this.gameService.game.scene.getScene('MainScene');
+    const scene = this.gameService.game.scene.getScene('MainScene');
     (<MainScene>scene).saveData();
     this.dialogRef.close();
     this.dialogService.showSnackBar('Game Saved!', 'Dismiss', {

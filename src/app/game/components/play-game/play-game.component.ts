@@ -49,7 +49,9 @@ export class PlayGameComponent implements OnInit {
   }
 
   openMenu() {
-    this.gameService.dialogService.open(MenuComponent);
+    this.gameService.dialogService.open(MenuComponent,{
+      autoFocus: false
+    });
   }
 
 }

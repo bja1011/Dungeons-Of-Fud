@@ -1,6 +1,6 @@
 <mat-grid-list cols="2" rowHeight="1:1">
   <mat-grid-tile *ngFor="let troll of trolls">
-    <div class="text-center troll-item" [class.explored]="troll.explored">
+    <div class="text-center troll-item" [class.explored]="troll.explored" *ngIf="troll.id !== 99">
       <img [src]="assetsService.getAsset('atlas/troll-'+(troll.explored ? troll.id : 'unknown')+'.png')">
       <div>{{troll.explored ? troll.name : "unknown"}}</div>
     </div>

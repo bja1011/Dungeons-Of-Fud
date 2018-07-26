@@ -311,7 +311,7 @@ export class MainScene extends MyScene {
       //   });
       // }
 
-      console.log(trolls)
+      console.log(trolls);
     }
 
     if ((<MyGame>this.sys.game).debug) {
@@ -448,17 +448,17 @@ export class MainScene extends MyScene {
       this.player.anims.play('idle');
       this.player.lastAnim = 'idle';
     } else {
-      this.trolls.forEach(troll => {
+      this.trolls.forEach((troll: Phaser.GameObjects.Sprite) => {
 
         const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, troll.x, troll.y);
 
         (<any>troll).nameText.setAlpha(1 - distance / 100);
 
-        if (!troll.talk && distance <= (<any>troll).interactionRadius && !(<any>troll).trollDataRef.converted) {
+        if (!(<any>troll).talk && distance <= (<any>troll).interactionRadius && !(<any>troll).trollDataRef.converted) {
 
           (<any>troll).trollDataRef.explored = true;
 
-          troll.talk = true;
+          (<any>troll).talk = true;
           this.vj.hide();
           const dialogRef = this.gameService.dialogService.open(
             ConversationComponent,
@@ -478,13 +478,15 @@ export class MainScene extends MyScene {
                     x: troll.x + 7,
                     duration: 50,
                     yoyo: true,
-                    repeat: 30,
+                    repeat: 15,
                     onComplete: () => {
                       (<any>troll).convertAnimSprite.alpha = 1;
                       (<any>troll).convertAnimSprite.play('puff');
                       (<any>troll).puffSound.play();
                       (<any>troll).trollDataRef.converted = true;
-
+                      troll.setFrame(troll.frame.name.replace('1', '1a'));
+                      troll.setFrame(troll.frame.name.replace('2', '2a'));
+                      troll.setFrame(troll.frame.name.replace('3', '3a'));
                     }
                   });
                 }

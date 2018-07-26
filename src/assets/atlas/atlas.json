@@ -4,8 +4,8 @@
 			"image": "atlas.png",
 			"format": "RGBA8888",
 			"size": {
-				"w": 190,
-				"h": 62
+				"w": 123,
+				"h": 124
 			},
 			"scale": 1,
 			"frames": [
@@ -45,8 +45,8 @@
 						"h": 56
 					},
 					"frame": {
-						"x": 48,
-						"y": 1,
+						"x": 1,
+						"y": 63,
 						"w": 57,
 						"h": 56
 					}
@@ -66,10 +66,52 @@
 						"h": 54
 					},
 					"frame": {
-						"x": 107,
+						"x": 48,
 						"y": 1,
 						"w": 42,
 						"h": 54
+					}
+				},
+				{
+					"filename": "troll-1a.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 30,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 30,
+						"h": 32
+					},
+					"frame": {
+						"x": 92,
+						"y": 1,
+						"w": 30,
+						"h": 32
+					}
+				},
+				{
+					"filename": "troll-3a.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 24,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 24,
+						"h": 32
+					},
+					"frame": {
+						"x": 92,
+						"y": 35,
+						"w": 24,
+						"h": 32
 					}
 				},
 				{
@@ -87,10 +129,31 @@
 						"h": 54
 					},
 					"frame": {
-						"x": 151,
-						"y": 1,
+						"x": 60,
+						"y": 69,
 						"w": 38,
 						"h": 54
+					}
+				},
+				{
+					"filename": "troll-2a.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 30,
+						"h": 32
+					},
+					"spriteSourceSize": {
+						"x": 4,
+						"y": 0,
+						"w": 22,
+						"h": 32
+					},
+					"frame": {
+						"x": 100,
+						"y": 69,
+						"w": 22,
+						"h": 32
 					}
 				}
 			]
@@ -99,6 +162,6 @@
 	"meta": {
 		"app": "https://www.codeandweb.com/texturepacker",
 		"version": "3.0",
-		"smartupdate": "$TexturePacker:SmartUpdate:58fd1a6f9c8aef2e266ec58566133f32:e232f9c252ef13b957a4448ddadd110a:cbce6b53f0f49e0bf15173c25c41f876$"
+		"smartupdate": "$TexturePacker:SmartUpdate:7b0c9470fb39068d69b5b20ebbde241d:7f7fcf961e04883fd4ac2664331c7ac7:cbce6b53f0f49e0bf15173c25c41f876$"
 	}
 }

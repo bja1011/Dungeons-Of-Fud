@@ -195,6 +195,20 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">troll-1a.png</key>
+            <key type="filename">troll-2a.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,8,15,16</rect>
+                <key>scale9Paddings</key>
+                <rect>8,8,15,16</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">troll-3.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -205,6 +219,19 @@
                 <rect>15,15,30,30</rect>
                 <key>scale9Paddings</key>
                 <rect>15,15,30,30</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">troll-3a.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>6,8,12,16</rect>
+                <key>scale9Paddings</key>
+                <rect>6,8,12,16</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -228,6 +255,9 @@
             <filename>troll-2.png</filename>
             <filename>troll-3.png</filename>
             <filename>troll-4.png</filename>
+            <filename>troll-1a.png</filename>
+            <filename>troll-2a.png</filename>
+            <filename>troll-3a.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

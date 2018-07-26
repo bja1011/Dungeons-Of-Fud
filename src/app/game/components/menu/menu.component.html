@@ -1,19 +1,21 @@
-<mat-list>
-  <mat-list-item>
-    <button mat-raised-button (click)="resetGame()">Start new Game</button>
-  </mat-list-item>
-  <mat-list-item>
-    <button mat-raised-button (click)="saveGame()">Save Game</button>
-  </mat-list-item>
-  <mat-list-item>
-    <button mat-raised-button (click)="openTrollopedia()">Trollpedia</button>
-  </mat-list-item>
-  <mat-list-item>
-    <div>
-      <mat-checkbox (change)="mute()" [(ngModel)]="muteSounds">Mute sounds</mat-checkbox>
-    </div>
-  </mat-list-item>
-</mat-list>
+<div>
+  <mat-list>
+    <mat-list-item>
+      <button mat-raised-button (click)="resetGame()">Start new Game</button>
+    </mat-list-item>
+    <mat-list-item>
+      <button mat-raised-button (click)="saveGame()">Save Game</button>
+    </mat-list-item>
+    <mat-list-item>
+      <button mat-raised-button (click)="openTrollopedia()">Trollpedia</button>
+    </mat-list-item>
+    <mat-list-item>
+      <div>
+        <mat-checkbox (change)="mute()" [(ngModel)]="muteSounds">Mute sounds</mat-checkbox>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</div>
 
 <!--<mat-accordion>-->
 
