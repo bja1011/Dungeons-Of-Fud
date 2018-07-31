@@ -31,6 +31,13 @@ export const trolls = [
     fudIds: [99],
     converted: false,
     explored: false,
+  },
+  {
+    id: 98,
+    name: 'David',
+    type: 'Omniscient',
+    level: '??',
+    fudIds: [],
   }
 ];
 

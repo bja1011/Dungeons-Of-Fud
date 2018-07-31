@@ -8,8 +8,9 @@ import * as Utils from './../utils/utils';
 import {getTroll, trolls} from '../constants/data';
 import * as configs from '../constants/configs';
 import {ConversationComponent} from '../components/conversation/conversation.component';
+import {DemoEndComponent} from '../components/demo-end/demo-end.component';
 
-const SPEED = 90;
+const SPEED = 190;
 
 export class MainScene extends MyScene {
 
@@ -154,6 +155,10 @@ export class MainScene extends MyScene {
               puff.alpha = 0;
             });
             puff.depth = troll.depth + 1;
+
+            if (obj.flippedVertical) {
+              troll.setScale(-1, 1);
+            }
 
             (<any>troll).convertAnimSprite = puff;
             (<any>troll).puffSound = this.sound.add('heal', configs.heal);
@@ -486,6 +491,13 @@ export class MainScene extends MyScene {
                       troll.setFrame(troll.frame.name.replace('1', '1a'));
                       troll.setFrame(troll.frame.name.replace('2', '2a'));
                       troll.setFrame(troll.frame.name.replace('3', '3a'));
+
+
+                      if (this.trolls.filter(trollSprite => (<any>trollSprite).trollDataRef.converted).length == this.trolls.length) {
+                        this.gameService.dialogService.open(
+                          DemoEndComponent
+                        );
+                      }
                     }
                   });
                 }
