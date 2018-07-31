@@ -26,6 +26,7 @@ export const trolls = [
   {
     id: 99,
     name: 'David',
+    type: 'Omniscient',
     level: '??',
     fudIds: [99],
     converted: false,
@@ -55,10 +56,12 @@ export const fuds = [
   },
   {
     id: 99,
-    name: `Hello brave Zerparian! <br> Help us fight the FUDs that are spreading by the trolls from the dungeons.`,
+    name: `
+      Hello brave Zerparian! <br> <br>
+      Help us to fight the FUDs spread by the trolls from the dungeons. <br> <br>
+      I'm giving you the Manuscript of Truth - use it when you need it. <br>
+`,
     confirmText: 'I will help!',
-    bingoUrl: 'https://fudbingo.com/ripple-can-freeze-your-coins'
-
   }
 ];
 

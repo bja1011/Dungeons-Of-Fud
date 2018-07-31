@@ -25,8 +25,6 @@ export class MainScene extends MyScene {
   animatedTiles: any;
   movementValues = {x: 0, y: 0};
 
-  charactersLayer;
-
   trolls: any[] = [];
 
   areas: any[] = [];
@@ -38,9 +36,7 @@ export class MainScene extends MyScene {
   shadowExploreData = [];
 
   preload(): void {
-
-    this.add.image(innerWidth / 2, innerHeight / 2, 'splash');
-
+    const splash = this.add.image(innerWidth / 2, innerHeight / 2, 'splash');
     const preloadValue = this.add.text(innerWidth / 2, 50, `test`, {
       fontSize: 20,
       fontFamily: 'Connection',
@@ -86,11 +82,11 @@ export class MainScene extends MyScene {
 
     this.load.on('progress', (progress) => {
       preloadValue.setText(Math.round(100 * progress) + '%');
+      splash.destroy();
     });
   }
 
   create(): void {
-
 
     this.events.on('resize', this.resize, this);
     this.animatedTiles = this['animatedTiles'];
@@ -159,10 +155,8 @@ export class MainScene extends MyScene {
             });
             puff.depth = troll.depth + 1;
 
-
             (<any>troll).convertAnimSprite = puff;
             (<any>troll).puffSound = this.sound.add('heal', configs.heal);
-
 
             // if (obj.properties && obj.properties.name) {
             //   name = obj.properties.name;
@@ -171,7 +165,8 @@ export class MainScene extends MyScene {
             // if (obj.properties && obj.properties.type) {
             //   name += ' \n ' + obj.properties.type;
             // }
-            const trollNameText = this.add.text(troll.x, troll.y - 65, `${name} \n XRP Troll`, {
+            const trollType = trollData.type ? trollData.type : 'XRP Troll';
+            const trollNameText = this.add.text(troll.x, troll.y - 50, `${name} \n ${trollType}`, {
               fontSize: 17,
               fontFamily: 'Connection',
               align: 'center',

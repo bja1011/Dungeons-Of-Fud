@@ -847,7 +847,7 @@
     <property name="id" type="int" value="2"/>
    </properties>
   </object>
-  <object id="28" gid="3076" x="235.667" y="47" width="49" height="56">
+  <object id="28" gid="3076" x="486.667" y="64.3333" width="49" height="56">
    <properties>
     <property name="id" type="int" value="99"/>
    </properties>
