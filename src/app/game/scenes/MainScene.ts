@@ -39,12 +39,15 @@ export class MainScene extends MyScene {
 
   preload(): void {
 
-    const preloadValue = this.add.text(100, 100, `test`, {
+    this.add.image(innerWidth / 2, innerHeight / 2, 'splash');
+
+    const preloadValue = this.add.text(innerWidth / 2, 50, `test`, {
       fontSize: 20,
       fontFamily: 'Connection',
       align: 'center',
       weight: 'bold'
     });
+    preloadValue.setOrigin(0.5, 1);
 
     this.gameService = (<MyGame>this.sys.game).gameService;
 
@@ -82,11 +85,12 @@ export class MainScene extends MyScene {
     this.load.spritesheet('player-atlas', this.gameService.assetsService.getAsset('hero-atlas.png'), {frameWidth: 32, frameHeight: 32});
 
     this.load.on('progress', (progress) => {
-      preloadValue.setText(100 * progress + '%');
+      preloadValue.setText(Math.round(100 * progress) + '%');
     });
   }
 
   create(): void {
+
 
     this.events.on('resize', this.resize, this);
     this.animatedTiles = this['animatedTiles'];
