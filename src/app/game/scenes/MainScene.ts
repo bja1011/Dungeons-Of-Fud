@@ -11,6 +11,7 @@ import {ConversationComponent} from '../components/conversation/conversation.com
 import {DemoEndComponent} from '../components/demo-end/demo-end.component';
 
 const SPEED = 190;
+let splash;
 
 export class MainScene extends MyScene {
 
@@ -37,7 +38,7 @@ export class MainScene extends MyScene {
   shadowExploreData = [];
 
   preload(): void {
-    const splash = this.add.image(innerWidth / 2, innerHeight / 2, 'splash');
+    splash = this.add.image(innerWidth / 2, innerHeight / 2, 'splash');
     const preloadValue = this.add.text(innerWidth / 2, 50, `test`, {
       fontSize: 20,
       fontFamily: 'Connection',
@@ -83,11 +84,11 @@ export class MainScene extends MyScene {
 
     this.load.on('progress', (progress) => {
       preloadValue.setText(Math.round(100 * progress) + '%');
-      splash.destroy();
     });
   }
 
   create(): void {
+    splash.destroy();
 
     this.events.on('resize', this.resize, this);
     this.animatedTiles = this['animatedTiles'];
