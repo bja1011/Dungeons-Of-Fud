@@ -10,6 +10,7 @@ import {FudViewComponent} from './components/fud-view/fud-view.component';
 import {FormsModule} from '@angular/forms';
 import { DemoEndComponent } from './components/demo-end/demo-end.component';
 import {TextSpellDirective} from '../text-spell.directive';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import {TextSpellDirective} from '../text-spell.directive';
     ConversationComponent,
     FudViewComponent,
     DemoEndComponent,
+    AboutComponent,
   ],
   declarations: [
     PlayGameComponent,
@@ -36,6 +38,7 @@ import {TextSpellDirective} from '../text-spell.directive';
     FudViewComponent,
     DemoEndComponent,
     TextSpellDirective,
+    AboutComponent,
 
   ]
 })

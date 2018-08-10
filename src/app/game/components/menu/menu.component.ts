@@ -4,6 +4,7 @@ import {TrollpediaComponent} from '../trollpedia/trollpedia.component';
 import {GameService} from '../../providers/game.service';
 import {MainScene} from '../../scenes/MainScene';
 import {MatDialogRef} from '@angular/material';
+import {AboutComponent} from '../about/about.component';
 
 @Component({
   selector: 'app-menu',
@@ -43,6 +44,17 @@ export class MenuComponent {
       {
         width: '300px',
         height: '400px'
+      }
+    );
+  }
+
+  openAbout() {
+    this.dialogService.open(
+      AboutComponent,
+      {
+        width: '300px',
+        height: '400px',
+        autoFocus: false,
       }
     );
   }
