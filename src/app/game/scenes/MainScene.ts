@@ -515,9 +515,6 @@ export class MainScene extends MyScene {
             this.player.stopped = false;
             console.log(result);
             if (result && result.id == 99) {
-              this.gameService.dialogService.open(
-                DemoEndComponent
-              );
               result.converted = true;
               this.gameService.dialogService.showSnackBar('Received The Manuscript of Truth!', 'Dismiss', {
                 duration: 1500
