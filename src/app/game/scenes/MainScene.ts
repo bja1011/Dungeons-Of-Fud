@@ -10,7 +10,7 @@ import * as configs from '../constants/configs';
 import {ConversationComponent} from '../components/conversation/conversation.component';
 import {DemoEndComponent} from '../components/demo-end/demo-end.component';
 
-const SPEED = 190;
+const SPEED = 80;
 let splash;
 
 export class MainScene extends MyScene {
@@ -39,6 +39,9 @@ export class MainScene extends MyScene {
 
   preload(): void {
     splash = this.add.image(innerWidth / 2, innerHeight / 2, 'splash');
+    if (innerHeight < splash.height) {
+      splash.setScale(innerHeight / splash.height);
+    }
     const preloadValue = this.add.text(innerWidth / 2, 50, `test`, {
       fontSize: 20,
       fontFamily: 'Connection',

@@ -9,6 +9,7 @@ import {MyMaterialModule} from './my-material/my-material.module';
 import {AssetsService} from './providers/assets.service';
 import { SafePipe } from './safe.pipe';
 import {FormsModule} from '@angular/forms';
+import { TextSpellDirective } from './text-spell.directive';
 
 const appRoutes: Routes = [
   {path: '', component: PlayGameComponent},

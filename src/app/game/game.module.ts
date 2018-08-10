@@ -9,6 +9,7 @@ import {SafePipe} from '../safe.pipe';
 import {FudViewComponent} from './components/fud-view/fud-view.component';
 import {FormsModule} from '@angular/forms';
 import { DemoEndComponent } from './components/demo-end/demo-end.component';
+import {TextSpellDirective} from '../text-spell.directive';
 
 @NgModule({
   imports: [
@@ -34,6 +35,8 @@ import { DemoEndComponent } from './components/demo-end/demo-end.component';
     SafePipe,
     FudViewComponent,
     DemoEndComponent,
+    TextSpellDirective,
+
   ]
 })
 export class GameModule {
