@@ -50,3 +50,10 @@ button {
 .text-center {
   text-align: center;
 }
+
+.cdk-overlay-pane.trollpedia {
+
+  .mat-dialog-container {
+    overflow: hidden;
+  }
+}

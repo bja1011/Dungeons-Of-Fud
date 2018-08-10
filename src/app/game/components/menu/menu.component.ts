@@ -43,7 +43,8 @@ export class MenuComponent {
       TrollpediaComponent,
       {
         width: '300px',
-        height: '400px'
+        height: '405px',
+        panelClass: 'trollpedia'
       }
     );
   }
