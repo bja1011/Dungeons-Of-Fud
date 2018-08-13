@@ -1,9 +1,15 @@
 import 'phaser';
+import {Character, CharacterConfig} from './Character.class';
 
-export class Troll extends Phaser.Physics.Arcade.Sprite {
+export class Troll extends Character {
 
-  constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame?: string | integer) {
-    super(scene, x, y, texture, frame);
-    scene.add.existing(this);
+  converted: boolean;
+  convertedFrameName: string;
+  killed: boolean;
+
+  constructor(params: CharacterConfig) {
+    super(params);
   }
 }
+
+
