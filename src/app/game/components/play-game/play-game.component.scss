@@ -10,6 +10,15 @@
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+
+  .top {
+    height: 40px;
+    background-color: $primary-color;
+    border-bottom: 2px $primary-color solid;
+    width: 100%;
+    line-height: 40px;
+  }
 
   .open-menu {
     position: fixed;
