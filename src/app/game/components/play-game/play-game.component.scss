@@ -3,7 +3,9 @@
 :host {
   height: 100%;
   overflow: hidden;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .ui {
@@ -14,7 +16,7 @@
 
   .top {
     height: 40px;
-    background-color: $primary-color;
+    background-color: #000;
     border-bottom: 2px $primary-color solid;
     width: 100%;
     line-height: 40px;
