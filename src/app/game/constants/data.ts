@@ -1,4 +1,4 @@
-export const trolls = [
+export const characters = [
   {
     id: 1,
     name: 'Mullick',
@@ -6,6 +6,8 @@ export const trolls = [
     fudIds: [3],
     converted: false,
     explored: false,
+    type: 'troll',
+    typeName: 'XRP troll',
   },
   {
     id: 2,
@@ -14,6 +16,8 @@ export const trolls = [
     fudIds: [1],
     converted: false,
     explored: false,
+    type: 'troll',
+    typeName: 'XRP troll',
   },
   {
     id: 3,
@@ -22,27 +26,31 @@ export const trolls = [
     fudIds: [2],
     converted: false,
     explored: false,
+    type: 'troll',
+    typeName: 'XRP troll',
   },
   {
     id: 99,
     name: 'David',
-    type: 'Omniscient',
+    typeName: 'Omniscient',
     level: '??',
     fudIds: [99],
     converted: false,
     explored: false,
+    type: 'david',
   },
   {
     id: 98,
     name: 'David',
-    type: 'Omniscient',
+    typeName: 'Omniscient',
     level: '??',
     fudIds: [],
+    type: 'david',
   }
 ];
 
-export function getTroll(id: number) {
-  return trolls.find(troll => troll.id === id);
+export function getCharacter(id: number) {
+  return characters.find(character => character.id === id);
 }
 
 export const fuds = [
@@ -75,3 +83,8 @@ export const fuds = [
 export function getFud(id: number) {
   return fuds.find(fud => fud.id === id);
 }
+
+export const configDef = {
+  frameRate: 9,
+  repeat: -1
+};

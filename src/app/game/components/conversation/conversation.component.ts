@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {getFud, getTroll} from '../../constants/data';
+import {getCharacter, getFud} from '../../constants/data';
 import {DialogService} from '../../../providers/dialog.service';
 import {FudViewComponent} from '../fud-view/fud-view.component';
 
@@ -11,7 +11,7 @@ import {FudViewComponent} from '../fud-view/fud-view.component';
 })
 export class ConversationComponent implements OnInit {
 
-  troll: any;
+  character: any;
   fud: any;
 
   confirmCallback = () => {
@@ -23,8 +23,8 @@ export class ConversationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.troll = getTroll(this.data.trollId);
-    this.fud = getFud(this.troll.fudIds[0]);
+    this.character = getCharacter(this.data.characterId);
+    this.fud = getFud(this.character.fudIds[0]);
 
     if (this.data.confirmCallback) {
       this.confirmCallback = this.data.confirmCallback;

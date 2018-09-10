@@ -5,12 +5,12 @@ import * as dat from 'dat.gui';
 import {MyGame} from '../components/play-game/play-game.component';
 import {MyScene} from '../classes/MyScene';
 import * as Utils from './../utils/utils';
-import {getTroll, trolls} from '../constants/data';
+import {configDef, getCharacter} from '../constants/data';
 import * as configs from '../constants/configs';
 import {ConversationComponent} from '../components/conversation/conversation.component';
-import {DemoEndComponent} from '../components/demo-end/demo-end.component';
+import {Character} from '../classes/Character.class';
 
-const SPEED = 80;
+const SPEED = 180;
 let splash;
 
 export class MainScene extends MyScene {
@@ -28,6 +28,7 @@ export class MainScene extends MyScene {
   movementValues = {x: 0, y: 0};
 
   trolls: any[] = [];
+  characters: Character[] = [];
 
   areas: any[] = [];
   disableSave = true;
@@ -120,73 +121,42 @@ export class MainScene extends MyScene {
       if (index === 7) {
 
         map.objects.forEach(objLayer => {
-          if (objLayer.name === 'characters') objLayer.objects.forEach((obj: any) => {
+          if (objLayer.name === 'characters') {
 
-            const trollData = getTroll(obj.properties.id);
-            // let troll = new Troll(this, obj.x, obj.y, 'characters', Utils.getObjectImage(obj.gid, this.map.imageCollections));
-            const troll = this.add.sprite(obj.x, obj.y, 'characters', Utils.getObjectImage(obj.gid, this.map.imageCollections));
-            troll.setOrigin(0.5, 1);
-            troll.setDepth(troll.y);
-            (<any>troll).interactionRadius = 30;
-            (<any>troll).trollId = obj.properties.id;
-            (<any>troll).trollDataRef = trollData;
+            objLayer.objects.forEach((obj: any) => {
 
-            if ((<MyGame>this.sys.game).debug) {
-              const g = this.add.graphics();
-              const circle = new Phaser.Geom.Circle(troll.x, troll.y, (<any>troll).interactionRadius);
-              g.fillStyle(0xFFff00);
-              g.alpha = 0.5;
-              g.fillCircleShape(circle);
-            }
+              const characterData = getCharacter(obj.properties.id);
 
-            this.trolls.push(troll);
-            const name = trollData.name;
+              const character = new Character({
+                scene: this,
+                x: obj.x,
+                y: obj.y,
+                texture: 'characters',
+                frame: Utils.getObjectImage(obj.gid, this.map.imageCollections),
+                data: characterData
+              });
 
-            const puff = this.add.sprite(troll.x, troll.y, 'puff-anim', 0);
-            puff.setOrigin(0.5, 0.7);
+              character.id = obj.properties.id;
 
-            const trollPuff = {
-              ...configDef,
-              key: 'puff',
-              duration: 3,
-              frameRate: 9,
-              frames: this.anims.generateFrameNumbers('puff-anim', {start: 0, end: 3}),
-            };
-            this.anims.create(trollPuff);
-            puff.alpha = 0;
-            puff.on('animationcomplete', (animation, frame) => {
-              console.log(animation, frame);
-              puff.alpha = 0;
+              if (obj.flippedVertical) {
+                character.setScale(-1, 1);
+              }
+
+              this.characters.push(character);
+
+
+              // Debug code
+              if ((<MyGame>this.sys.game).debug) {
+                const g = this.add.graphics();
+                const circle = new Phaser.Geom.Circle(character.x, character.y, character.interactionRadius);
+                g.fillStyle(0xFFff00);
+                g.alpha = 0.5;
+                g.fillCircleShape(circle);
+              }
+              // End debug code
+
             });
-            puff.depth = troll.depth + 1;
-
-            if (obj.flippedVertical) {
-              troll.setScale(-1, 1);
-            }
-
-            (<any>troll).convertAnimSprite = puff;
-            (<any>troll).puffSound = this.sound.add('heal', configs.heal);
-
-            // if (obj.properties && obj.properties.name) {
-            //   name = obj.properties.name;
-            // }
-
-            // if (obj.properties && obj.properties.type) {
-            //   name += ' \n ' + obj.properties.type;
-            // }
-            const trollType = trollData.type ? trollData.type : 'XRP Troll';
-            const trollNameText = this.add.text(troll.x, troll.y - 50, `${name} \n ${trollType}`, {
-              fontSize: 17,
-              fontFamily: 'Connection',
-              align: 'center',
-            });
-            trollNameText.setOrigin(0.5, 1);
-            trollNameText.setStroke('#000', 5);
-            trollNameText.setDepth(troll.depth);
-            trollNameText.setAlpha(0);
-
-            (<any>troll).nameText = trollNameText;
-          });
+          }
         });
       }
     });
@@ -199,14 +169,9 @@ export class MainScene extends MyScene {
       });
     });
 
-    this.player = this.physics.add.sprite(140, 90, 'player-atlas');
+    this.player = this.physics.add.sprite(140, 190, 'player-atlas');
     this.player.setSize(5, 3);
     this.player.setOrigin(0.5, 1);
-
-    const configDef = {
-      frameRate: 9,
-      repeat: -1
-    };
 
     const animWalkDownCfg = {
       ...configDef,
@@ -456,54 +421,28 @@ export class MainScene extends MyScene {
       this.player.anims.play('idle');
       this.player.lastAnim = 'idle';
     } else {
-      this.trolls.forEach((troll: Phaser.GameObjects.Sprite) => {
+      this.characters.forEach((character: Character) => {
 
-        const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, troll.x, troll.y);
+        const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, character.x, character.y);
 
-        (<any>troll).nameText.setAlpha(1 - distance / 100);
+        character.nameText.setAlpha(1 - distance / 100);
 
-        if (!(<any>troll).talk && distance <= (<any>troll).interactionRadius && !(<any>troll).trollDataRef.converted) {
+        if (!character.talk && distance <= character.interactionRadius && !character.converted) {
 
-          (<any>troll).trollDataRef.explored = true;
+          character.explored = true;
+          character.talk = true;
 
-          (<any>troll).talk = true;
           this.vj.hide();
+
           const dialogRef = this.gameService.dialogService.open(
             ConversationComponent,
             {
               maxHeight: '500px',
               data: {
-                trollId: (<any>troll).trollId,
+                characterId: character.id,
                 confirmCallback: () => {
 
-                  (<any>troll).interactionRadius = 0;
-                  setTimeout(() => {
-                    (<any>troll).nameText.setText((<any>troll).nameText.text.replace('XRP Troll', 'Converted Supporter'));
-                  }, 2000);
-
-                  this.tweens.add({
-                    targets: troll,
-                    x: troll.x + 7,
-                    duration: 50,
-                    yoyo: true,
-                    repeat: 15,
-                    onComplete: () => {
-                      (<any>troll).convertAnimSprite.alpha = 1;
-                      (<any>troll).convertAnimSprite.play('puff');
-                      (<any>troll).puffSound.play();
-                      (<any>troll).trollDataRef.converted = true;
-                      troll.setFrame(troll.frame.name.replace('1', '1a'));
-                      troll.setFrame(troll.frame.name.replace('2', '2a'));
-                      troll.setFrame(troll.frame.name.replace('3', '3a'));
-
-
-                      if (this.trolls.filter(trollSprite => (<any>trollSprite).trollDataRef.converted).length == this.trolls.length) {
-                        this.gameService.dialogService.open(
-                          DemoEndComponent
-                        );
-                      }
-                    }
-                  });
+                  character.convert();
                 }
               }
             }
@@ -514,7 +453,7 @@ export class MainScene extends MyScene {
           dialogRef.afterClosed().subscribe(result => {
             this.player.stopped = false;
             console.log(result);
-            if (result && result.id == 99) {
+            if (result && result.id === 99) {
               result.converted = true;
               this.gameService.dialogService.showSnackBar('Received The Manuscript of Truth!', 'Dismiss', {
                 duration: 1500
@@ -523,8 +462,12 @@ export class MainScene extends MyScene {
           });
         }
 
-        if ((<any>troll).talk && Phaser.Math.Distance.Between(this.player.x, this.player.y, troll.x, troll.y) > (<any>troll).interactionRadius) {
-          (<any>troll).talk = false;
+        if (
+          character.talk
+          &&
+          Phaser.Math.Distance.Between(this.player.x, this.player.y, character.x, character.y) > character.interactionRadius
+        ) {
+          character.talk = false;
         }
       });
     }

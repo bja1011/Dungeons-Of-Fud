@@ -5,6 +5,7 @@ export class MyGameObject extends Phaser.Physics.Arcade.Sprite {
   name: string;
   type: string;
   level: number;
+  data: any;
 
   constructor(params: MyGameObjectConfig) {
     super(params.scene, params.x, params.y, params.texture, params.frame);
@@ -18,5 +19,6 @@ export interface MyGameObjectConfig {
   y: number;
   texture: string;
   frame?: string | integer;
+  data: any;
 }
 

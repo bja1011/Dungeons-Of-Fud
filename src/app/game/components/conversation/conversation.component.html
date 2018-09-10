@@ -1,11 +1,11 @@
-<div *ngIf="troll">
-  <h3 class="name">{{troll.name}}
-    <small style="font-size:11px;">(lvl {{troll.level}})</small>
+<div *ngIf="character">
+  <h3 class="name">{{character.name}}
+    <small style="font-size:11px;">(lvl {{character.level}})</small>
   </h3>
   <p [innerHTML]="fud.name"></p>
 
   <div class="text-center" *ngIf="fud.id == 99">
-    <button mat-button (click)="dialogRef.close(troll)">{{fud.confirmText}}</button>
+    <button mat-button (click)="dialogRef.close(character)">{{fud.confirmText}}</button>
   </div>
 
   <div class="text-center" *ngIf="fud.id != 99">
