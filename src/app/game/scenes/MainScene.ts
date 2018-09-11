@@ -9,6 +9,7 @@ import {configDef, getCharacter} from '../constants/data';
 import * as configs from '../constants/configs';
 import {ConversationComponent} from '../components/conversation/conversation.component';
 import {Character} from '../classes/Character.class';
+import {Player} from '../classes/Player.class';
 
 const SPEED = 180;
 let splash;
@@ -169,45 +170,12 @@ export class MainScene extends MyScene {
       });
     });
 
-    this.player = this.physics.add.sprite(140, 190, 'player-atlas');
-    this.player.setSize(5, 3);
-    this.player.setOrigin(0.5, 1);
-
-    const animWalkDownCfg = {
-      ...configDef,
-      key: 'walk-down',
-      frames: this.anims.generateFrameNumbers('player-atlas', {start: 0, end: 5}),
-    };
-
-    const animWalkLeftCfg = {
-      ...configDef,
-      key: 'walk-left',
-      frames: this.anims.generateFrameNumbers('player-atlas', {start: 6, end: 11}),
-    };
-
-    const animWalkRightCfg = {
-      ...configDef,
-      key: 'walk-right',
-      frames: this.anims.generateFrameNumbers('player-atlas', {start: 12, end: 17}),
-    };
-
-    const animWalkUpCfg = {
-      ...configDef,
-      key: 'walk-up',
-      frames: this.anims.generateFrameNumbers('player-atlas', {start: 18, end: 23}),
-    };
-
-    const idleWalkUpCfg = {
-      ...configDef,
-      key: 'idle',
-      frames: this.anims.generateFrameNumbers('player-atlas', {start: 0, end: 0}),
-    };
-
-    this.anims.create(animWalkDownCfg);
-    this.anims.create(animWalkLeftCfg);
-    this.anims.create(animWalkUpCfg);
-    this.anims.create(animWalkRightCfg);
-    this.anims.create(idleWalkUpCfg);
+    this.player = new Player({
+      scene: this,
+      x: 140,
+      y: 190,
+      texture: 'player-atlas',
+    });
 
     let pathLayer;
 
@@ -230,7 +198,7 @@ export class MainScene extends MyScene {
     this.controls = this.input.keyboard.createCursorKeys();
 
     this.cameras.main.setBackgroundColor('#1c1117');
-    this.cameras.main.roundPixels = false;
+    this.cameras.main.roundPixels = true;
 
     this.vj = new VJoystick({
       scene: this,
@@ -283,8 +251,6 @@ export class MainScene extends MyScene {
       //     let trollData = trolls.find(troll => troll.id == trollSprite.trollDataRef.id);
       //   });
       // }
-
-      console.log(trolls);
     }
 
     if ((<MyGame>this.sys.game).debug) {
@@ -309,7 +275,7 @@ export class MainScene extends MyScene {
         y: this.player.y
       },
       shadow: [...this.shadowExploreData],
-      trolls: trolls
+      characters: this.characters
     };
     localStorage.setItem('savedData', JSON.stringify(data));
   }
@@ -451,8 +417,9 @@ export class MainScene extends MyScene {
           this.player.stopped = true;
 
           dialogRef.afterClosed().subscribe(result => {
+
             this.player.stopped = false;
-            console.log(result);
+
             if (result && result.id === 99) {
               result.converted = true;
               this.gameService.dialogService.showSnackBar('Received The Manuscript of Truth!', 'Dismiss', {
@@ -463,9 +430,7 @@ export class MainScene extends MyScene {
         }
 
         if (
-          character.talk
-          &&
-          Phaser.Math.Distance.Between(this.player.x, this.player.y, character.x, character.y) > character.interactionRadius
+          character.talk && !character.isInteracting(this.player.x, this.player.y)
         ) {
           character.talk = false;
         }

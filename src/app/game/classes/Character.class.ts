@@ -101,6 +101,10 @@ export class Character extends MyGameObject {
     });
   }
 
+  isInteracting(playerX: number, playerY: number) {
+    return Phaser.Math.Distance.Between(playerX, playerY, this.x, this.y) < this.interactionRadius;
+  }
+
   collide() {
   }
 

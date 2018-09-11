@@ -19,6 +19,6 @@ export interface MyGameObjectConfig {
   y: number;
   texture: string;
   frame?: string | integer;
-  data: any;
+  data?: any;
 }
 

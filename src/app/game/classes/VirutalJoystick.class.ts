@@ -42,7 +42,7 @@ export default class VJoystick extends Phaser.GameObjects.Graphics {
     this.lineGraphic.clear();
 
     const circle = new Phaser.Geom.Circle(this.x + result.x * vectorLen2, this.y + result.y * vectorLen2, 30);
-    this.lineGraphic.fillStyle(0xFFff00);
+    this.lineGraphic.fillStyle(0xaaaaaa);
     this.lineGraphic.alpha = 0.5;
     this.lineGraphic.fillCircleShape(circle);
     this.lineGraphic.setDepth(1000000);
