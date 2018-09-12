@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {trolls} from '../../constants/data';
 import {AssetsService} from '../../../providers/assets.service';
+import {characters} from '../../constants/data';
 
 @Component({
   selector: 'app-trollpedia',
@@ -9,7 +9,7 @@ import {AssetsService} from '../../../providers/assets.service';
 })
 export class TrollpediaComponent implements OnInit {
 
-  trolls: any[] = trolls;
+  characters: any[] = characters;
 
   constructor(public assetsService: AssetsService,) {
   }

@@ -30,9 +30,9 @@ export class ConversationComponent implements OnInit {
       this.confirmCallback = this.data.confirmCallback;
     }
 
-    this.dialogRef.afterClosed()
-      .subscribe((a) => {
-      });
+    // this.dialogRef.afterClosed()
+    //   .subscribe((a) => {
+    //   });
   }
 
   showFudUrl(fudUrl: string) {

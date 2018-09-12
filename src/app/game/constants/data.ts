@@ -8,6 +8,8 @@ export const characters = [
     explored: false,
     type: 'troll',
     typeName: 'XRP troll',
+    frameName: 'troll-1.png',
+    convertedFrameName: 'troll-1a.png'
   },
   {
     id: 2,
@@ -18,6 +20,8 @@ export const characters = [
     explored: false,
     type: 'troll',
     typeName: 'XRP troll',
+    frameName: 'troll-2.png',
+    convertedFrameName: 'troll-2a.png'
   },
   {
     id: 3,
@@ -28,6 +32,8 @@ export const characters = [
     explored: false,
     type: 'troll',
     typeName: 'XRP troll',
+    frameName: 'troll-3.png',
+    convertedFrameName: 'troll-3a.png'
   },
   {
     id: 99,
@@ -46,6 +52,7 @@ export const characters = [
     level: '??',
     fudIds: [],
     type: 'david',
+    frameName: 'troll-4.png',
   }
 ];
 

@@ -388,56 +388,15 @@ export class MainScene extends MyScene {
       this.player.lastAnim = 'idle';
     } else {
       this.characters.forEach((character: Character) => {
-
-        const distance = Phaser.Math.Distance.Between(this.player.x, this.player.y, character.x, character.y);
-
-        character.nameText.setAlpha(1 - distance / 100);
-
-        if (!character.talk && distance <= character.interactionRadius && !character.converted) {
-
-          character.explored = true;
-          character.talk = true;
-
-          this.vj.hide();
-
-          const dialogRef = this.gameService.dialogService.open(
-            ConversationComponent,
-            {
-              maxHeight: '500px',
-              data: {
-                characterId: character.id,
-                confirmCallback: () => {
-
-                  character.convert();
-                }
-              }
-            }
-          );
-
-          this.player.stopped = true;
-
-          dialogRef.afterClosed().subscribe(result => {
-
-            this.player.stopped = false;
-
-            if (result && result.id === 99) {
-              result.converted = true;
-              this.gameService.dialogService.showSnackBar('Received The Manuscript of Truth!', 'Dismiss', {
-                duration: 1500
-              });
-            }
-          });
-        }
-
-        if (
-          character.talk && !character.isInteracting(this.player.x, this.player.y)
-        ) {
-          character.talk = false;
-        }
+        character.update();
       });
     }
 
     this.player.setDepth(this.player.y);
+  }
+
+  getCharacterObject(characterId) {
+    return this.characters.find(character => character.id === characterId);
   }
 }
 

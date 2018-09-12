@@ -8,6 +8,7 @@ export class Player extends MyGameObject {
   type: string;
   level: number;
   data: any;
+  stopped = false;
 
   constructor(params: MyGameObjectConfig) {
     super(params);
