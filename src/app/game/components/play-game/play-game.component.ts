@@ -13,7 +13,7 @@ import {MenuComponent} from '../menu/menu.component';
 })
 export class PlayGameComponent implements OnInit {
 
-  constructor(private gameService: GameService,) {
+  constructor(public gameService: GameService,) {
   }
 
   ngOnInit() {

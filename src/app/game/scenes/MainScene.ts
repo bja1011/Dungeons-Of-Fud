@@ -297,6 +297,8 @@ export class MainScene extends MyScene {
     setTimeout(() => {
       tile.setVisible(false);
     }, 620);
+
+    this.gameService.gameReady = true;
   }
 
   update(time, delta) {

@@ -8,6 +8,7 @@ import {DialogService} from '../../providers/dialog.service';
 export class GameService {
 
   game: Phaser.Game;
+  gameReady = false;
 
   constructor(public assetsService: AssetsService,
               public dialogService: DialogService,) {
