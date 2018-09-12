@@ -1,6 +1,7 @@
 import 'phaser';
 import {MyGameObject, MyGameObjectConfig} from './MyGameObject.class';
 import {configDef} from '../constants/data';
+import Sprite = Phaser.GameObjects.Sprite;
 
 export class Player extends MyGameObject {
 
@@ -9,6 +10,7 @@ export class Player extends MyGameObject {
   level: number;
   data: any;
   stopped = false;
+  aura: Sprite;
 
   constructor(params: MyGameObjectConfig) {
     super(params);
@@ -51,11 +53,27 @@ export class Player extends MyGameObject {
       frames: this.scene.anims.generateFrameNumbers('player-atlas', {start: 0, end: 0}),
     };
 
+    const auraCfg = {
+      ...configDef,
+      key: 'aura',
+      frames: this.scene.anims.generateFrameNumbers('aura-anim', {start: 0, end: 31}),
+    };
+
     this.scene.anims.create(animWalkDownCfg);
     this.scene.anims.create(animWalkLeftCfg);
     this.scene.anims.create(animWalkUpCfg);
     this.scene.anims.create(animWalkRightCfg);
     this.scene.anims.create(idleWalkUpCfg);
+    this.scene.anims.create(auraCfg);
+
+    this.aura = this.scene.add.sprite(this.x, this.y, 'aura-anim');
+    this.aura.setOrigin(0.5, 0.8);
+    this.aura.anims.play('aura');
+  }
+
+  update() {
+    this.aura.x = this.x;
+    this.aura.y = this.y;
   }
 }
 

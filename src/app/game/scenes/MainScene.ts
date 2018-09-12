@@ -65,6 +65,11 @@ export class MainScene extends MyScene {
       frameHeight: 128,
     });
 
+    this.load.spritesheet('aura-anim', this.gameService.assetsService.getAsset('anims/aura.png'), {
+      frameWidth: 128,
+      frameHeight: 128,
+    });
+
     this.load.spritesheet(
       'tiles',
       this.gameService.assetsService.getAsset('tilemap/tiles-extruded-big.png'),
@@ -94,6 +99,9 @@ export class MainScene extends MyScene {
 
   create(): void {
     splash.destroy();
+
+    this.gameService.gameReady = true;
+
 
     this.events.on('resize', this.resize, this);
     this.animatedTiles = this['animatedTiles'];
@@ -198,7 +206,7 @@ export class MainScene extends MyScene {
     this.controls = this.input.keyboard.createCursorKeys();
 
     this.cameras.main.setBackgroundColor('#1c1117');
-    this.cameras.main.roundPixels = true;
+    this.cameras.main.roundPixels = false;
 
     this.vj = new VJoystick({
       scene: this,
@@ -298,7 +306,6 @@ export class MainScene extends MyScene {
       tile.setVisible(false);
     }, 620);
 
-    this.gameService.gameReady = true;
   }
 
   update(time, delta) {
@@ -395,6 +402,8 @@ export class MainScene extends MyScene {
     }
 
     this.player.setDepth(this.player.y);
+
+    this.player.update();
   }
 
   getCharacterObject(characterId) {
