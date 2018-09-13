@@ -39,3 +39,10 @@ button {
   }
 }
 
+
+:host {
+  -webkit-overflow-scrolling: touch;
+  overflow-y: scroll;
+  display: block;
+  height: 100%;
+}
