@@ -24,6 +24,8 @@ export class Character extends MyGameObject {
 
   constructor(params: MyGameObjectConfig) {
     super(params);
+    this.gameService = (<MyScene>this.scene).gameService;
+
     params.scene.physics.add.existing(this);
 
     this.setOrigin(0.5, 1);
@@ -104,6 +106,10 @@ export class Character extends MyGameObject {
     return Phaser.Math.Distance.Between(playerX, playerY, this.x, this.y) < this.interactionRadius;
   }
 
+  isTroll() {
+    return this.type === 'troll';
+  }
+
   update() {
 
     const player = (<MyScene>this.scene).player;
@@ -119,7 +125,12 @@ export class Character extends MyGameObject {
 
     this.nameText.setAlpha(1 - distance / 100);
 
+    if (this.isTroll() && distance < 100) {
+      this.scene['player'].aura.setAlpha(1 - distance / 100);
+    }
+
     if (!this.converted) {
+
       if (!this.talk && distance <= this.interactionRadius) {
 
         this.explored = true;
@@ -127,13 +138,17 @@ export class Character extends MyGameObject {
 
         this.scene['vj'].hide();
 
-        const dialogRef = (<MyScene>this.scene).gameService.dialogService.open(
+        const dialogRef = this.gameService.dialogService.open(
           ConversationComponent,
           {
             maxHeight: '500px',
             data: {
               characterId: this.id,
               confirmCallback: () => {
+                this.gameService.eventEmitter.emit({
+                  type: 'exp',
+                  value: 500
+                });
                 this.convert();
               }
             }
@@ -146,8 +161,14 @@ export class Character extends MyGameObject {
           player.stopped = false;
 
           if (result && result.id === 99) {
+
+            this.gameService.eventEmitter.emit({
+              type: 'exp',
+              value: 100
+            });
+
             this.converted = true;
-            (<MyScene>this.scene).gameService.dialogService.showSnackBar('Received The Manuscript of Truth!', 'Dismiss', {
+            this.gameService.dialogService.showSnackBar('Received The Manuscript of Truth!', 'Dismiss', {
               duration: 1500
             });
           }

@@ -1,4 +1,5 @@
 import 'phaser';
+import {GameService} from '../providers/game.service';
 
 export class MyGameObject extends Phaser.Physics.Arcade.Sprite {
 
@@ -6,6 +7,7 @@ export class MyGameObject extends Phaser.Physics.Arcade.Sprite {
   type: string;
   level: number;
   data: any;
+  gameService: GameService;
 
   constructor(params: MyGameObjectConfig) {
     super(params.scene, params.x, params.y, params.texture, params.frame);
