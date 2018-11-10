@@ -29,7 +29,10 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/phaser-ce/build/phaser.min.js",
+              "node_modules/phaser-debug/dist/phaser-debug.js",
+            ]
           },
           "configurations": {
             "production": {

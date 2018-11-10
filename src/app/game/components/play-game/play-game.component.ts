@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import 'phaser';
 import {GameService} from '../../providers/game.service';
-import {AssetsService} from '../../../providers/assets.service';
-import {MainScene} from '../../scenes/MainScene';
-import {BootScene} from '../../scenes/Boot.scene';
 import {MenuComponent} from '../menu/menu.component';
+
+import * as Phaser from 'phaser-ce';
+
+import Boot from '../../states/boot.state';
+import Preloader from '../../states/preload.state';
+import Title from '../../states/main.state';
 
 @Component({
   selector: 'app-play-game',
@@ -19,49 +21,49 @@ export class PlayGameComponent implements OnInit {
   ngOnInit() {
 
     const debugMode = window.location.search.indexOf('debug') > -1;
-    this.gameService.game = new MyGame(<any>{
-        width: innerWidth,
-        height: innerHeight,
-        type: Phaser.WEBGL,
-        parent: 'game',
-        scene: [BootScene, MainScene],
-        pixelArt: true,
-        autoResize: true,
-        activePointers: 1,
-        physics: {
-          default: 'arcade',
-          arcade: {
-            debug: debugMode,
-            gravity: {y: 0}
-          }
-        },
-      },
-      this.gameService
-    );
 
-    if (debugMode) {
-      (<MyGame>this.gameService.game).debug = true;
-    }
+    const gameConfig: Phaser.IGameConfig = {
+      enableDebug: false,
+      width: window.innerWidth * devicePixelRatio,
+      height: window.innerHeight * devicePixelRatio,
+      renderer: Phaser.AUTO,
+      parent: 'game',
+      transparent: false,
+      antialias: true,
+    };
 
-    window.addEventListener('resize', () => {
-      this.gameService.game.resize(window.innerWidth, window.innerHeight);
-    }, false);
+    this.gameService.game = new MyGame(gameConfig);
+
+    (<MyGame>this.gameService.game).gameService = this.gameService;
+
+    // if (debugMode) {
+    //   (<MyGame>this.gameService.game).debug = true;
+    // }
+    //
+    // window.addEventListener('resize', () => {
+    //   this.gameService.game.resize(window.innerWidth, window.innerHeight);
+    // }, false);
   }
 
   openMenu() {
-    this.gameService.dialogService.open(MenuComponent,{
+    this.gameService.dialogService.open(MenuComponent, {
       autoFocus: false
     });
   }
 
 }
 
-export class MyGame extends Phaser.Game {
-  gameService: GameService;
-  public debug = false;
 
-  constructor(gameConfig: GameConfig, gameService: GameService) {
-    super(gameConfig);
-    this.gameService = gameService;
+export class MyGame extends Phaser.Game {
+  public gameService: GameService;
+
+  constructor(config: Phaser.IGameConfig) {
+    super(config);
+
+    this.state.add('boot', Boot);
+    this.state.add('preloader', Preloader);
+    this.state.add('title', Title);
+
+    this.state.start('boot');
   }
 }

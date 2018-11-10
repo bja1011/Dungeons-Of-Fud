@@ -11,6 +11,6 @@ export class GameService {
   gameReady = false;
 
   constructor(public assetsService: AssetsService,
-              public dialogService: DialogService,) {
+              public dialogService: DialogService, ) {
   }
 }

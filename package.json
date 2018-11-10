@@ -27,8 +27,8 @@
     "compodoc": "0.0.41",
     "core-js": "^2.5.4",
     "dat.gui": "^0.7.2",
-    "phaser": "^3.12.0-beta2",
-    "phaser-animated-tiles": "^2.0.2",
+    "phaser-ce": "^2.11.1",
+    "phaser-debug": "^1.1.8",
     "rxjs": "^6.0.0",
     "zone.js": "^0.8.26"
   },
