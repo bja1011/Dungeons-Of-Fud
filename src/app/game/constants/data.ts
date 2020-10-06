@@ -9,7 +9,7 @@ export const characters = [
     type: 'troll',
     typeName: 'XRP troll',
     frameName: 'troll-1.png',
-    convertedFrameName: 'troll-1a.png'
+    convertedFrameName: 'troll-1a.png',
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ export const characters = [
     type: 'troll',
     typeName: 'XRP troll',
     frameName: 'troll-2.png',
-    convertedFrameName: 'troll-2a.png'
+    convertedFrameName: 'troll-2a.png',
   },
   {
     id: 3,
@@ -33,7 +33,7 @@ export const characters = [
     type: 'troll',
     typeName: 'XRP troll',
     frameName: 'troll-3.png',
-    convertedFrameName: 'troll-3a.png'
+    convertedFrameName: 'troll-3a.png',
   },
   {
     id: 99,
@@ -53,28 +53,28 @@ export const characters = [
     fudIds: [],
     type: 'david',
     frameName: 'troll-4.png',
-  }
+  },
 ];
 
 export function getCharacter(id: number) {
-  return characters.find(character => character.id === id);
+  return characters.find((character) => character.id === id);
 }
 
 export const fuds = [
   {
     id: 1,
     name: 'The XRP blockchain is centralised',
-    bingoUrl: 'https://fudbingo.com/the-xrp-blockchain-is-centralised'
+    bingoUrl: 'https://fudbingo.com/the-xrp-blockchain-is-centralised',
   },
   {
     id: 2,
     name: 'XRP is a security',
-    bingoUrl: 'https://fudbingo.com/xrp-is-a-security'
+    bingoUrl: 'https://fudbingo.com/xrp-is-a-security',
   },
   {
     id: 3,
     name: 'Ripple can freeze your coins',
-    bingoUrl: 'https://fudbingo.com/ripple-can-freeze-your-coins'
+    bingoUrl: 'https://fudbingo.com/ripple-can-freeze-your-coins',
   },
   {
     id: 99,
@@ -84,14 +84,14 @@ export const fuds = [
       I'm giving you the Manuscript of Truth - use it when you need it. <br>
 `,
     confirmText: 'I will help!',
-  }
+  },
 ];
 
 export function getFud(id: number) {
-  return fuds.find(fud => fud.id === id);
+  return fuds.find((fud) => fud.id === id);
 }
 
 export const configDef = {
   frameRate: 9,
-  repeat: -1
+  repeat: -1,
 };

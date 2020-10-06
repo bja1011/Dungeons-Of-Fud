@@ -1,25 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import 'phaser';
-import {GameService} from '../../providers/game.service';
-import {AssetsService} from '../../../providers/assets.service';
-import {MainScene} from '../../scenes/MainScene';
-import {BootScene} from '../../scenes/Boot.scene';
-import {MenuComponent} from '../menu/menu.component';
+import { GameService } from '../../providers/game.service';
+import { AssetsService } from '../../../providers/assets.service';
+import { MainScene } from '../../scenes/MainScene';
+import { BootScene } from '../../scenes/Boot.scene';
+import { MenuComponent } from '../menu/menu.component';
 
 @Component({
   selector: 'app-play-game',
   templateUrl: './play-game.component.html',
-  styleUrls: ['./play-game.component.scss']
+  styleUrls: ['./play-game.component.scss'],
 })
 export class PlayGameComponent implements OnInit {
-
-  constructor(public gameService: GameService,) {
-  }
+  constructor(public gameService: GameService) {}
 
   ngOnInit() {
-
     const debugMode = window.location.search.indexOf('debug') > -1;
-    this.gameService.game = new MyGame(<any>{
+    this.gameService.game = new MyGame(
+      <any>{
         width: innerWidth,
         height: innerHeight,
         type: Phaser.WEBGL,
@@ -32,8 +30,8 @@ export class PlayGameComponent implements OnInit {
           default: 'arcade',
           arcade: {
             debug: debugMode,
-            gravity: {y: 0}
-          }
+            gravity: { y: 0 },
+          },
         },
       },
       this.gameService
@@ -43,17 +41,20 @@ export class PlayGameComponent implements OnInit {
       (<MyGame>this.gameService.game).debug = true;
     }
 
-    window.addEventListener('resize', () => {
-      this.gameService.game.resize(window.innerWidth, window.innerHeight);
-    }, false);
+    window.addEventListener(
+      'resize',
+      () => {
+        this.gameService.game.resize(window.innerWidth, window.innerHeight);
+      },
+      false
+    );
   }
 
   openMenu() {
-    this.gameService.dialogService.open(MenuComponent,{
-      autoFocus: false
+    this.gameService.dialogService.open(MenuComponent, {
+      autoFocus: false,
     });
   }
-
 }
 
 export class MyGame extends Phaser.Game {

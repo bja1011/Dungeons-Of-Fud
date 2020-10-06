@@ -1,14 +1,16 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 import {
   MatButtonModule,
   MatCheckboxModule,
   MatDialogModule,
-  MatExpansionModule, MatGridListModule,
+  MatExpansionModule,
+  MatGridListModule,
   MatIconModule,
-  MatListModule, MatSnackBarModule,
-  MatToolbarModule
+  MatListModule,
+  MatSnackBarModule,
+  MatToolbarModule,
 } from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const usedModules = [
   BrowserAnimationsModule,
@@ -27,6 +29,4 @@ const usedModules = [
   imports: usedModules,
   exports: usedModules,
 })
-export class MyMaterialModule {
-}
-
+export class MyMaterialModule {}

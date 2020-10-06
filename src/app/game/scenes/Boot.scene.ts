@@ -1,12 +1,11 @@
 import 'phaser';
-import {MyScene} from '../classes/MyScene';
-import {MyGame} from '../components/play-game/play-game.component';
+import { MyScene } from '../classes/MyScene';
+import { MyGame } from '../components/play-game/play-game.component';
 
 export class BootScene extends MyScene {
-
   constructor() {
     super({
-      key: 'BootScene'
+      key: 'BootScene',
     });
   }
 
@@ -17,14 +16,16 @@ export class BootScene extends MyScene {
       fontSize: 20,
       fontFamily: 'Connection',
       align: 'center',
-      weight: 'bold'
+      weight: 'bold',
     });
     t.setOrigin(0.5, 1);
-    this.load.image('splash', this.gameService.assetsService.getAsset('splash.png'));
+    this.load.image(
+      'splash',
+      this.gameService.assetsService.getAsset('splash.png')
+    );
   }
 
   create() {
     this.scene.start('MainScene');
   }
-
 }

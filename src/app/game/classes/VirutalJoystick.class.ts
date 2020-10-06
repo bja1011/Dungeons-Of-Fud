@@ -1,7 +1,6 @@
 import Graphics = Phaser.GameObjects.Graphics;
 
 export default class VJoystick extends Phaser.GameObjects.Graphics {
-
   isOn: boolean;
   lineGraphic: Graphics;
 
@@ -25,28 +24,34 @@ export default class VJoystick extends Phaser.GameObjects.Graphics {
   }
 
   calculate(x: number, y: number) {
-
     const vector = {
       x: x - this.x,
-      y: y - this.y
+      y: y - this.y,
     };
 
     const vectorLen = Phaser.Math.Distance.Between(this.x, this.y, x, y);
-    const vectorLen2 = Phaser.Math.Clamp(Phaser.Math.Distance.Between(this.x, this.y, x, y), 0, 20);
+    const vectorLen2 = Phaser.Math.Clamp(
+      Phaser.Math.Distance.Between(this.x, this.y, x, y),
+      0,
+      20
+    );
 
     const result = {
       x: vector.x / vectorLen,
-      y: vector.y / vectorLen
+      y: vector.y / vectorLen,
     };
 
     this.lineGraphic.clear();
 
-    const circle = new Phaser.Geom.Circle(this.x + result.x * vectorLen2, this.y + result.y * vectorLen2, 30);
+    const circle = new Phaser.Geom.Circle(
+      this.x + result.x * vectorLen2,
+      this.y + result.y * vectorLen2,
+      30
+    );
     this.lineGraphic.fillStyle(0xaaaaaa);
     this.lineGraphic.alpha = 0.5;
     this.lineGraphic.fillCircleShape(circle);
     this.lineGraphic.setDepth(1000000);
-
 
     return result;
   }
@@ -56,7 +61,6 @@ export default class VJoystick extends Phaser.GameObjects.Graphics {
     this.lineGraphic.clear();
     this.visible = false;
   }
-
 }
 
 export interface IVJoystick {

@@ -4,7 +4,7 @@ export const music = {
   detune: 0,
   seek: 0,
   loop: false,
-  delay: 0
+  delay: 0,
 };
 
 export const heal = {
@@ -13,12 +13,11 @@ export const heal = {
   detune: 0,
   seek: 0,
   loop: false,
-  delay: 0
+  delay: 0,
 };
 
 export const walkSound = {
   volume: 0.1,
   rate: 1,
-  loop: true
+  loop: true,
 };
-

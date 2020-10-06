@@ -1,8 +1,7 @@
-import {GameService} from '../providers/game.service';
-import {Player} from './Player.class';
+import { GameService } from '../providers/game.service';
+import { Player } from './Player.class';
 
 export class MyScene extends Phaser.Scene {
-
   gameService: GameService;
   player: Player;
 
@@ -13,5 +12,4 @@ export class MyScene extends Phaser.Scene {
   resize() {
     this.cameras.resize(innerWidth, innerHeight);
   }
-
 }

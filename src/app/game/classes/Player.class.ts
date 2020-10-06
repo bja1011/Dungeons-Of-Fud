@@ -1,11 +1,10 @@
 import 'phaser';
-import {MyGameObject, MyGameObjectConfig} from './MyGameObject.class';
-import {configDef} from '../constants/data';
+import { MyGameObject, MyGameObjectConfig } from './MyGameObject.class';
+import { configDef } from '../constants/data';
 import Sprite = Phaser.GameObjects.Sprite;
-import {MyScene} from './MyScene';
+import { MyScene } from './MyScene';
 
 export class Player extends MyGameObject {
-
   name: string;
   type: string;
   level: number;
@@ -38,37 +37,55 @@ export class Player extends MyGameObject {
     const animWalkDownCfg = {
       ...configDef,
       key: 'walk-down',
-      frames: this.scene.anims.generateFrameNumbers('player-atlas', {start: 0, end: 5}),
+      frames: this.scene.anims.generateFrameNumbers('player-atlas', {
+        start: 0,
+        end: 5,
+      }),
     };
 
     const animWalkLeftCfg = {
       ...configDef,
       key: 'walk-left',
-      frames: this.scene.anims.generateFrameNumbers('player-atlas', {start: 6, end: 11}),
+      frames: this.scene.anims.generateFrameNumbers('player-atlas', {
+        start: 6,
+        end: 11,
+      }),
     };
 
     const animWalkRightCfg = {
       ...configDef,
       key: 'walk-right',
-      frames: this.scene.anims.generateFrameNumbers('player-atlas', {start: 12, end: 17}),
+      frames: this.scene.anims.generateFrameNumbers('player-atlas', {
+        start: 12,
+        end: 17,
+      }),
     };
 
     const animWalkUpCfg = {
       ...configDef,
       key: 'walk-up',
-      frames: this.scene.anims.generateFrameNumbers('player-atlas', {start: 18, end: 23}),
+      frames: this.scene.anims.generateFrameNumbers('player-atlas', {
+        start: 18,
+        end: 23,
+      }),
     };
 
     const idleWalkUpCfg = {
       ...configDef,
       key: 'idle',
-      frames: this.scene.anims.generateFrameNumbers('player-atlas', {start: 0, end: 0}),
+      frames: this.scene.anims.generateFrameNumbers('player-atlas', {
+        start: 0,
+        end: 0,
+      }),
     };
 
     const auraCfg = {
       ...configDef,
       key: 'aura',
-      frames: this.scene.anims.generateFrameNumbers('aura-anim', {start: 0, end: 31}),
+      frames: this.scene.anims.generateFrameNumbers('aura-anim', {
+        start: 0,
+        end: 31,
+      }),
     };
 
     this.scene.anims.create(animWalkDownCfg);
@@ -108,7 +125,7 @@ export class Player extends MyGameObject {
       alpha: 0,
       ease: 'Quad.easeOut',
       scaleX: 2,
-      scaleY: 2
+      scaleY: 2,
     });
     // tooltip.setAlpha(0);
   }
@@ -118,4 +135,3 @@ export class Player extends MyGameObject {
     this.aura.y = this.y;
   }
 }
-

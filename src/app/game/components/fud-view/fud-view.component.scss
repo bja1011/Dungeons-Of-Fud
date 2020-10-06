@@ -24,7 +24,7 @@ button {
   width: 320px;
   font-size: 16px;
   transform: translateX(-160px);
-  animation: pop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);;
+  animation: pop 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 @keyframes pop {
@@ -38,7 +38,6 @@ button {
     transform: translateX(-160px) scale(1);
   }
 }
-
 
 :host {
   -webkit-overflow-scrolling: touch;

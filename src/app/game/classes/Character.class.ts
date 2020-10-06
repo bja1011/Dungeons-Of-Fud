@@ -1,12 +1,11 @@
 import 'phaser';
-import {MyGameObject, MyGameObjectConfig} from './MyGameObject.class';
+import { MyGameObject, MyGameObjectConfig } from './MyGameObject.class';
 import * as configs from '../constants/configs';
-import {configDef} from '../constants/data';
-import {ConversationComponent} from '../components/conversation/conversation.component';
-import {MyScene} from './MyScene';
+import { configDef } from '../constants/data';
+import { ConversationComponent } from '../components/conversation/conversation.component';
+import { MyScene } from './MyScene';
 
 export class Character extends MyGameObject {
-
   name: string;
   type: string;
   level: number;
@@ -37,11 +36,16 @@ export class Character extends MyGameObject {
     this.name = params.data.name;
     this.type = params.data.type;
 
-    const characterNameText = this.scene.add.text(this.x, this.y - 50, `${this.name} \n ${this.data.typeName}`, {
-      fontSize: 17,
-      fontFamily: 'Connection',
-      align: 'center',
-    });
+    const characterNameText = this.scene.add.text(
+      this.x,
+      this.y - 50,
+      `${this.name} \n ${this.data.typeName}`,
+      {
+        fontSize: 17,
+        fontFamily: 'Connection',
+        align: 'center',
+      }
+    );
     characterNameText.setOrigin(0.5, 1);
     characterNameText.setStroke('#000', 5);
     characterNameText.setDepth(this.depth);
@@ -59,7 +63,10 @@ export class Character extends MyGameObject {
         duration: 3,
         frameRate: 9,
         repeat: 0,
-        frames: this.scene.anims.generateFrameNumbers('puff-anim', {start: 0, end: 3}),
+        frames: this.scene.anims.generateFrameNumbers('puff-anim', {
+          start: 0,
+          end: 3,
+        }),
       };
 
       this.scene.anims.create(characterPuff);
@@ -77,9 +84,14 @@ export class Character extends MyGameObject {
   convert(instant?: boolean) {
     this.interactionRadius = 0;
 
-    setTimeout(() => {
-      this.nameText.setText(this.nameText.text.replace('XRP troll', 'Converted Supporter'));
-    }, instant ? 0 : 2000);
+    setTimeout(
+      () => {
+        this.nameText.setText(
+          this.nameText.text.replace('XRP troll', 'Converted Supporter')
+        );
+      },
+      instant ? 0 : 2000
+    );
 
     if (instant) {
       this.setFrame(this.convertedFrameName);
@@ -97,13 +109,16 @@ export class Character extends MyGameObject {
           this.puffSound.play();
           this.converted = true;
           this.setFrame(this.convertedFrameName);
-        }
+        },
       });
     }
   }
 
   isInteracting(playerX: number, playerY: number) {
-    return Phaser.Math.Distance.Between(playerX, playerY, this.x, this.y) < this.interactionRadius;
+    return (
+      Phaser.Math.Distance.Between(playerX, playerY, this.x, this.y) <
+      this.interactionRadius
+    );
   }
 
   isTroll() {
@@ -111,10 +126,14 @@ export class Character extends MyGameObject {
   }
 
   update() {
-
     const player = (<MyScene>this.scene).player;
 
-    const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y);
+    const distance = Phaser.Math.Distance.Between(
+      player.x,
+      player.y,
+      this.x,
+      this.y
+    );
 
     // Set troll to look at player direction
     if (player.x < this.x) {
@@ -130,9 +149,7 @@ export class Character extends MyGameObject {
     }
 
     if (!this.converted) {
-
       if (!this.talk && distance <= this.interactionRadius) {
-
         this.explored = true;
         this.talk = true;
 
@@ -147,11 +164,11 @@ export class Character extends MyGameObject {
               confirmCallback: () => {
                 this.gameService.eventEmitter.emit({
                   type: 'exp',
-                  value: 500
+                  value: 500,
                 });
                 this.convert();
-              }
-            }
+              },
+            },
           }
         );
 
@@ -161,16 +178,19 @@ export class Character extends MyGameObject {
           player.stopped = false;
 
           if (result && result.id === 99) {
-
             this.gameService.eventEmitter.emit({
               type: 'exp',
-              value: 100
+              value: 100,
             });
 
             this.converted = true;
-            this.gameService.dialogService.showSnackBar('Received The Manuscript of Truth!', 'Dismiss', {
-              duration: 1500
-            });
+            this.gameService.dialogService.showSnackBar(
+              'Received The Manuscript of Truth!',
+              'Dismiss',
+              {
+                duration: 1500,
+              }
+            );
           }
         });
       }
@@ -178,16 +198,12 @@ export class Character extends MyGameObject {
       // this.scene.physics.moveTo(this, player.x, player.y, 180);
     }
 
-    if (
-      this.talk && !this.isInteracting(player.x, player.y)
-    ) {
+    if (this.talk && !this.isInteracting(player.x, player.y)) {
       this.talk = false;
     }
   }
 
-  collide() {
-  }
-
+  collide() {}
 }
 
 export interface CharacterConfig {
@@ -198,4 +214,3 @@ export interface CharacterConfig {
   frame?: string | integer;
   data: any;
 }
-

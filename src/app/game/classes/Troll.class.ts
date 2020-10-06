@@ -1,8 +1,7 @@
 import 'phaser';
-import {Character, CharacterConfig} from './Character.class';
+import { Character, CharacterConfig } from './Character.class';
 
 export class Troll extends Character {
-
   converted: boolean;
   convertedFrameName: string;
   killed: boolean;
@@ -13,5 +12,3 @@ export class Troll extends Character {
     super(params);
   }
 }
-
-

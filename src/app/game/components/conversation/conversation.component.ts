@@ -1,26 +1,25 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {getCharacter, getFud} from '../../constants/data';
-import {DialogService} from '../../../providers/dialog.service';
-import {FudViewComponent} from '../fud-view/fud-view.component';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { getCharacter, getFud } from '../../constants/data';
+import { DialogService } from '../../../providers/dialog.service';
+import { FudViewComponent } from '../fud-view/fud-view.component';
 
 @Component({
   selector: 'app-conversation',
   templateUrl: './conversation.component.html',
-  styleUrls: ['./conversation.component.scss']
+  styleUrls: ['./conversation.component.scss'],
 })
 export class ConversationComponent implements OnInit {
-
   character: any;
   fud: any;
 
-  confirmCallback = () => {
-  };
+  confirmCallback = () => {};
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-              public dialogRef: MatDialogRef<ConversationComponent>,
-              public dialogService: DialogService,) {
-  }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<ConversationComponent>,
+    public dialogService: DialogService
+  ) {}
 
   ngOnInit() {
     this.character = getCharacter(this.data.characterId);
@@ -42,18 +41,16 @@ export class ConversationComponent implements OnInit {
       height: '100%',
       panelClass: 'fud-view-dialog',
       data: {
-        fudUrl
-      }
+        fudUrl,
+      },
     });
 
-    fudDialogRef.afterClosed()
-      .subscribe((response: string) => {
-        this.dialogService.closeAll();
+    fudDialogRef.afterClosed().subscribe((response: string) => {
+      this.dialogService.closeAll();
 
-        if (response === 'confirmed' && this.confirmCallback) {
-          this.confirmCallback();
-        }
-      });
+      if (response === 'confirmed' && this.confirmCallback) {
+        this.confirmCallback();
+      }
+    });
   }
-
 }

@@ -8,9 +8,8 @@ describe('TrollpediaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TrollpediaComponent ]
-    })
-    .compileComponents();
+      declarations: [TrollpediaComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

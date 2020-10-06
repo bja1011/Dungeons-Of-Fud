@@ -5,7 +5,7 @@ import { AssetsService } from './assets.service';
 describe('AssetsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AssetsService]
+      providers: [AssetsService],
     });
   });
 

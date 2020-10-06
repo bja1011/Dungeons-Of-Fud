@@ -1,11 +1,10 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import * as AssetsData from '../../assets.json';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AssetsService {
-
   private readonly assetsData = AssetsData;
 
   constructor() {
@@ -21,7 +20,9 @@ export class AssetsService {
    * @returns {string}
    */
   getAsset(assetPath: string): string {
-    return this.assetsData[`/assets/${assetPath}`] ? this.assetsData[`/assets/${assetPath}`] : 'no-asset';
+    return this.assetsData[`/assets/${assetPath}`]
+      ? this.assetsData[`/assets/${assetPath}`]
+      : 'no-asset';
   }
 
   /**
@@ -33,7 +34,7 @@ export class AssetsService {
    */
   getAssetsByDirectory(directory: string): object {
     const assetsObject = {};
-    Object.entries(this.assetsData).forEach(asset => {
+    Object.entries(this.assetsData).forEach((asset) => {
       if (asset[0].split('/').indexOf(directory) === 2) {
         assetsObject[asset[0]] = asset[1];
       }

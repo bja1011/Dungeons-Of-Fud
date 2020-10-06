@@ -8,9 +8,8 @@ describe('FudViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FudViewComponent ]
-    })
-    .compileComponents();
+      declarations: [FudViewComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

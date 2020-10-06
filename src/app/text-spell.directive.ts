@@ -1,18 +1,14 @@
-import {Directive, Input, OnInit} from '@angular/core';
+import { Directive, Input, OnInit } from '@angular/core';
 
 @Directive({
-  selector: '[appTextSpell]'
+  selector: '[appTextSpell]',
 })
 export class TextSpellDirective implements OnInit {
-
   @Input() appTextSpell: string;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
     console.log(this.appTextSpell);
-
   }
-
 }
